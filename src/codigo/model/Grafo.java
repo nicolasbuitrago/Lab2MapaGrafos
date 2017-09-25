@@ -5,10 +5,14 @@
  */
 package codigo.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Estudiante
  */
 public class Grafo {
+    ArrayList<Nodo> nodos;
+    ArrayList<Arco> arcos;
     
 }

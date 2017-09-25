@@ -12,22 +12,13 @@ import java.awt.Color;
  * @author nicolasbuitrago
  */
 public class Nodo {
-    int name, x,y;
+    int x,y;
     Color color;
 
-    public Nodo(int name, int x, int y, Color color) {
-        this.name = name;
+    public Nodo(int x, int y, Color color) {
         this.x = x;
         this.y = y;
         this.color = color;
-    }
-
-    public int getName() {
-        return name;
-    }
-
-    public void setName(int name) {
-        this.name = name;
     }
 
     public int getX() {
