@@ -16,6 +16,8 @@ import javax.swing.JFrame;
  */
 public class Controller {
     
+    LocalTime horaActual, horaLlegada;
+    
     public void iniciarVentana(JFrame frame){
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -30,7 +32,7 @@ public class Controller {
     }
     
     public String horaActual(){
-        LocalTime horaActual = LocalTime.now();
+        horaActual = LocalTime.now();
         String hora = fromHoraMilitar(horaActual.format(DateTimeFormatter.ofPattern("HH:mm")));
         return hora;
     }
