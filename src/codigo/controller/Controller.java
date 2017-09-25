@@ -5,10 +5,25 @@
  */
 package codigo.controller;
 
+import codigo.view.Ventana;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Estudiante
  */
 public class Controller {
     
+    public void iniciarVentana(JFrame frame){
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setVisible(true);
+    }
+    
+    public void main(){
+        Ventana ventana = new Ventana();
+        iniciarVentana(ventana);
+
+        
+    }
 }
