@@ -27,7 +27,6 @@ public class Controller {
     public void main(){
         Ventana ventana = new Ventana(this);
         iniciarVentana(ventana);
-
         
     }
     
