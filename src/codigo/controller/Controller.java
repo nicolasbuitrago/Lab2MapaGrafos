@@ -33,6 +33,7 @@ public class Controller {
     
     public void main(){
         grafo= new Grafo();
+        getGrafo();
         Ventana ventana = new Ventana(this);
         iniciarVentana(ventana);
         
@@ -59,7 +60,7 @@ public class Controller {
         return Integer.parseInt(s);
     }
     
-    public void getGrafo(){
+    private void getGrafo(){
         FileReader frg =null;
         try {
             File Grafo = new File("Grafo.txt");
