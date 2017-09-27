@@ -5,8 +5,13 @@
  */
 package codigo.model;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -16,8 +21,8 @@ import javax.swing.JPanel;
  */
 public class Mapa extends JPanel {
 
-    public Mapa() {
-        this.setSize(300, 400); //se selecciona el tamaño del panel
+    public Mapa(JPanel padre) {
+        this.setSize(padre.getWidth(), padre.getHeight()); //se selecciona el tamaño del panel
     }
 
 //Se crea un método cuyo parámetro debe ser un objeto Graphics
@@ -55,6 +60,7 @@ public class Mapa extends JPanel {
 //
 //    @Override
 //    public void paintComponent(Graphics g) {
+//        setOpaque(false);
 //        super.paintComponent(g);
 //        g.drawImage(img, 0, 0, null); // dibuja la imagen al iniciar la aplicacion
 //    }
