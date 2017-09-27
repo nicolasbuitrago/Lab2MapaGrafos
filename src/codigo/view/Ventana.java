@@ -16,10 +16,10 @@ public class Ventana extends javax.swing.JFrame {
     
     public Ventana(Controller control) {
         initComponents();
-        jpMapa.add(new Mapa(jpMapa));
+        control.setMapa(new Mapa(jpMapa));
+        jpMapa.add(control.getMapa());
         jpMapa.repaint();
         lblHoraActual.setText(control.horaActual());
-//        control.paintMapa(jpMapa);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);

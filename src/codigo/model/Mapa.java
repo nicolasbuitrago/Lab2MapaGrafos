@@ -21,12 +21,11 @@ import javax.swing.JPanel;
  */
 public class Mapa extends JPanel {
     
-    private BufferedImage img = null;
+    private BufferedImage imagen = null;
 
     public Mapa(JPanel padre) {
-        
         try {
-            img = ImageIO.read(getClass().getResource("/Imagenes/mapa.png")); // la carga en una BufferedReader
+            imagen = ImageIO.read(getClass().getResource("/Imagenes/mapa.png")); // la carga en una BufferedReader
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -43,7 +42,14 @@ public class Mapa extends JPanel {
 //se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
 //        grafico.drawImage(Img.getImage(), 0, 0, null);
 
-        grafico.drawImage(img, 0, 0, height.width, height.height, null);
+//        Graphics2D pint = img.createGraphics();
+//        pint.setColor(Color.GREEN);
+//        pint.fillRect(200, 200, 100, 100);
+//        pint.dispose();
+
+        grafico.drawImage(imagen, 0, 0, height.width, height.height, null);
+        
+        
 
         setOpaque(false);
         super.paintComponent(grafico);

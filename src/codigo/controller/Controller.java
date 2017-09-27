@@ -7,11 +7,14 @@ package codigo.controller;
 
 import codigo.model.Arco;
 import codigo.model.Grafo;
+import codigo.model.Mapa;
 import codigo.model.Nodo;
 import codigo.view.Ventana;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,16 +31,26 @@ import javax.swing.JPanel;
  */
 public class Controller {
     
-    LocalTime horaActual, horaLlegada;
-    Grafo grafo;
-    Ventana ventana;
+    private LocalTime horaActual, horaLlegada;
+    private Grafo grafo;
+    private Ventana ventana;
+    private Mapa mapa;
 
     public Controller() {
         grafo= new Grafo();
         getGrafo();
         ventana = new Ventana(this);
-        
     }
+
+    public Mapa getMapa() {
+        return mapa;
+    }
+
+    public void setMapa(Mapa mapa) {
+        this.mapa = mapa;
+    }
+
+    
     
     public String horaActual(){
         horaActual = LocalTime.now();
@@ -108,5 +121,68 @@ public class Controller {
 //        panel.repaint();
     }
     
+    public void crearGrafoMapa(JPanel panel){
+        panel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(rbNodo.isSelected()){
+                    g.setColor(Color.BLACK);
+                    g.fillOval(e.getX()-tamNodos/2, e.getY()-tamNodos/2, tamNodos, tamNodos);
+                    nodos.add(new Nodo(cantNodos,e.getX()-tamNodos/2,e.getY()-tamNodos/2,Color.red));
+                    g.setColor(Color.white);
+                    g.drawString(Integer.toString(cantNodos),e.getX(), e.getY());
+                    cantNodos++;
+                }else{
+                    if(nodoInicial==null){
+                        nodoInicial = buscarNodo(e.getX(),e.getY());
+                        if(nodoInicial!=null){
+                            seleccionarNodo(nodoInicial,g,Color.YELLOW);
+                        }
+                    }else{
+                        nodoFinal = buscarNodo(e.getX(),e.getY());
+                        if(nodoFinal!=null){
+                            seleccionarNodo(nodoFinal,g,Color.YELLOW);
+                            if(nodoFinal.getName()!=nodoInicial.getName()){
+                                g.setColor(Color.BLACK);
+                                g.drawLine(nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2);
+                                int dist = distancia(nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2);
+                                arcos.add(new Arco(nodoInicial.getName(),nodoFinal.name,nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2,
+                                dist));
+                                 g.drawString(Integer.toString(distancia(nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2)),nodoInicial.x+dist/2,nodoInicial.y+5);
+                            }else{
+                                seleccionarNodo(nodoInicial,g,Color.BLACK);
+                            }
+                            seleccionarNodo(nodoInicial,g,Color.BLACK);
+                            seleccionarNodo(nodoFinal,g,Color.BLACK);
+                            nodoInicial = null;
+                        }else{
+                            seleccionarNodo(nodoInicial,g,Color.BLACK);
+                            nodoInicial = null;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                 
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                 
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                 
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                 
+            }
+        });
+    }
     
 }
