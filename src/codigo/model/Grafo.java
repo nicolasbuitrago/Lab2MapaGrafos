@@ -28,7 +28,7 @@ public class Grafo {
         arcos = new ArrayList();
     }
     
-    // <editor-fold defaultstate="collapsed" desc="Metodo insertar">   
+    // <editor-fold defaultstate="collapsed" desc="Metodo insertar de la clase">   
     /*public void insertar (Graphics g){
         jPanel1.addMouseListener(new MouseListener() {
             @Override
@@ -92,6 +92,14 @@ public class Grafo {
             }
         });
     }*/// </editor-fold>  
+    
+    public void newNodo(Nodo nodo){
+        nodos.add(nodo);
+    }
+
+    public void newArco(Arco arco){
+        arcos.add(arco);
+    }
     
     public int distancia(int x1, int y1, int x2, int y2){
         return (int) Math.sqrt(Math.pow(x2-x1, 2.0)+Math.pow(y2-y1, 2.0));

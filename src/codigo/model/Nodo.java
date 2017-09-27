@@ -5,7 +5,6 @@
  */
 package codigo.model;
 
-import java.awt.Color;
 
 /**
  *
@@ -13,12 +12,12 @@ import java.awt.Color;
  */
 public class Nodo {
     int x,y;
-    Color color;
+//    Color color;
 
-    public Nodo(int x, int y, Color color) {
+    public Nodo(int x, int y) {
         this.x = x;
         this.y = y;
-        this.color = color;
+//        this.color = color;
     }
 
     public int getX() {
@@ -35,14 +34,6 @@ public class Nodo {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
     
 }
