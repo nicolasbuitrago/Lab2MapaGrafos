@@ -20,20 +20,30 @@ import javax.swing.JPanel;
  * @author Estudiante
  */
 public class Mapa extends JPanel {
+    
+    private BufferedImage img = null;
 
     public Mapa(JPanel padre) {
+        
+        try {
+            img = ImageIO.read(getClass().getResource("/Imagenes/mapa.png")); // la carga en una BufferedReader
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
         this.setSize(padre.getWidth(), padre.getHeight()); //se selecciona el tamaño del panel
     }
 
 //Se crea un método cuyo parámetro debe ser un objeto Graphics
     public void paint(Graphics grafico) {
         Dimension height = getSize();
-
 //Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
         ImageIcon Img = new ImageIcon(getClass().getResource("/Imagenes/mapa.png"));
 
 //se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
-        grafico.drawImage(Img.getImage(), 0, 0, null);
+//        grafico.drawImage(Img.getImage(), 0, 0, null);
+
+        grafico.drawImage(img, 0, 0, height.width, height.height, null);
 
         setOpaque(false);
         super.paintComponent(grafico);
