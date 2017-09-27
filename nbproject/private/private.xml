@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Estudiante/Documents/NetBeansProjects/Codigo/src/codigo/Codigo.java</file>
+            <file>file:/C:/Users/Estudiante/Desktop/Codigo/src/codigo/model/Mapa.java</file>
+            <file>file:/C:/Users/Estudiante/Desktop/Codigo/src/codigo/controller/Controller.java</file>
+            <file>file:/C:/Users/Estudiante/Desktop/Codigo/src/codigo/view/Ventana.java</file>
+            <file>file:/C:/Users/Estudiante/Desktop/Codigo/src/codigo/model/Arco.java</file>
+            <file>file:/C:/Users/Estudiante/Desktop/Codigo/src/codigo/Codigo.java</file>
+            <file>file:/C:/Users/Estudiante/Desktop/Codigo/src/Imagenes/mapa.png</file>
+            <file>file:/C:/Users/Estudiante/Desktop/Codigo/src/codigo/model/Nodo.java</file>
+            <file>file:/C:/Users/Estudiante/Desktop/Codigo/src/codigo/model/Grafo.java</file>
         </group>
     </open-files>
 </project-private>

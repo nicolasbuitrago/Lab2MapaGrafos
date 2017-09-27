@@ -1,4 +1,4 @@
-Vertice = x,y     Arco = nodoInicial,nodoFinal,x1,y1,x2,y2,distancia
+Vertice = x,y         Arco = nodoInicial,nodoFinal,x1,y1,x2,y2,distancia
 1,1
 2,2
 3,3
