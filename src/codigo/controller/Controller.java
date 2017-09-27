@@ -9,12 +9,18 @@ import codigo.model.Arco;
 import codigo.model.Grafo;
 import codigo.model.Nodo;
 import codigo.view.Ventana;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.JFrame;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 /**
  *
@@ -30,6 +36,7 @@ public class Controller {
         grafo= new Grafo();
         getGrafo();
         ventana = new Ventana(this);
+        
     }
     
     public String horaActual(){
@@ -81,6 +88,24 @@ public class Controller {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public void paintMapa(JPanel panel) {
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(getClass().getResource("/Imagenes/mapa.png")); // la carga en una BufferedReader
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // creamos una instancia graphics desde la imagen para pintar sobre ella
+        Graphics2D pint = img.createGraphics();
+        pint.setColor(Color.GREEN);
+        pint.fillRect(200, 200, 100, 100);
+        pint.dispose();
+        Graphics g = panel.getGraphics();
+//        panel.paintComponent(g);
+        g.drawImage(img, 0, 0, null);
+//        panel.repaint();
     }
     
     

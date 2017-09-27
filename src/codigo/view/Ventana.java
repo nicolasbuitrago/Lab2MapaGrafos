@@ -6,6 +6,7 @@
 package codigo.view;
 
 import codigo.controller.Controller;
+import codigo.model.Mapa;
 
 /**
  *
@@ -15,53 +16,14 @@ public class Ventana extends javax.swing.JFrame {
     
     public Ventana(Controller control) {
         initComponents();
-        
+        jpMapa = new Mapa();
         lblHoraActual.setText(control.horaActual());
-        
+//        control.paintMapa(jpMapa);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
     }
-    
-//    public ImageJPanel() {
-//        super("Dibujo sobre imagen");
-//
-//        this.add(new PanelOverDraw());
-//        this.setSize(484, 519);
-//        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//        this.setVisible(true);
-//    }
-
-    public class PanelOverDraw extends JPanel {
-
-        private BufferedImage img = null;
-
-        public PanelOverDraw() {
-
-            File imageFile = new File("/Imagenes/mapa.png"); // guarda la imagen en un archivo
-            try {
-                img = ImageIO.read(getClass().getResourceAsStream(imageFile.toString())); // la carga en una BufferedReader
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            this.setPreferredSize(new Dimension(484, 409));
-
-            // creamos una instancia graphics desde la imagen para pintar sobre ella
-            Graphics2D pint = img.createGraphics();
-            pint.setColor(Color.GREEN);
-            pint.fillRect(200, 200, 100, 100);
-            pint.dispose();
-
-        }
-
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.drawImage(img, 0, 0, null); // dibuja la imagen al iniciar la aplicacion
-        }
-    }
-        
+            
 
     /**
      * This method is called from within the constructor to initialize the form.
