@@ -35,5 +35,10 @@ public class Nodo {
     public void setY(int y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "Nodo{" + "x=" + x + ", y=" + y + '}';
+    }
     
 }

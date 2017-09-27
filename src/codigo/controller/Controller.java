@@ -69,10 +69,10 @@ public class Controller {
             v = gra.readLine();
             while (v != null) {                
                 String[] c = v.split(",");//System.out.println("c.length = "+c.length);
-                if(c[0].equals("n")){
-                    grafo.newNodo(new Nodo(Integer.parseInt(c[1]),Integer.parseInt(c[2])));
+                if(c.length==2){
+                    grafo.newNodo(new Nodo(Integer.parseInt(c[0]),Integer.parseInt(c[1])));
                 }else{
-                    grafo.newArco(new Arco(toInt(c[1]),toInt(c[2]),toInt(c[3]),toInt(c[4]),toInt(c[5]),toInt(c[6]),toInt(c[7])));
+                    grafo.newArco(new Arco(toInt(c[0]),toInt(c[1]),toInt(c[2]),toInt(c[3]),toInt(c[4]),toInt(c[5]),toInt(c[6])));
                 }
                 v = gra.readLine();
             }

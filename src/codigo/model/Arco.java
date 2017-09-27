@@ -69,5 +69,10 @@ public class Arco {
     public void setY2(int y2) {
         this.y2 = y2;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Arco{" + "nodoInicial=" + nodoInicial + ", nodoFinal=" + nodoFinal + ", x1=" + x1 + ", y1=" + y1 + ", x2=" + x2 + ", y2=" + y2 + ", dist=" + dist + '}';
+    }
+
 }
