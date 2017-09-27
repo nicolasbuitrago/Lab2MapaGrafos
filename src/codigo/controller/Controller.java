@@ -24,19 +24,12 @@ public class Controller {
     
     LocalTime horaActual, horaLlegada;
     Grafo grafo;
-    
-    public void iniciarVentana(JFrame frame){
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setVisible(true);
-    }
-    
-    public void main(){
+    Ventana ventana;
+
+    public Controller() {
         grafo= new Grafo();
         getGrafo();
-        Ventana ventana = new Ventana(this);
-        iniciarVentana(ventana);
-        
+        ventana = new Ventana(this);
     }
     
     public String horaActual(){
@@ -89,4 +82,6 @@ public class Controller {
             }
         }
     }
+    
+    
 }
