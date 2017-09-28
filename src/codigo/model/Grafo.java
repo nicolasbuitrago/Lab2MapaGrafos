@@ -5,6 +5,8 @@
  */
 package codigo.model;
 
+import codigo.controller.ControlGraphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
@@ -222,6 +224,18 @@ public class Grafo {
          return false;
     }
      
+    private int nearestarc (Nodo p, Arco arc){
+        int n = 0;
+        
+        Nodo a=arc.nodoInicial,b=arc.nodoFinal;
+        
+        double d1=Math.sqrt(Math.pow(p.x-a.x,2)+Math.pow(p.y-a.y,2));
+        
+        
+        return n;
+    }
+     
      
     
 }
+
