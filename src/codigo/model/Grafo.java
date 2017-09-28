@@ -5,8 +5,6 @@
  */
 package codigo.model;
 
-import codigo.controller.ControlGraphics;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
@@ -167,7 +165,7 @@ public class Grafo {
     
     private int distanciaRectaPunto(Nodo c, Arco ar){
         double u = factorU(c, ar),x,y;//   System.out.println("u = "+u);
-        double d = -1;
+        double d = Integer.MAX_VALUE;
         Nodo p, a = ar.getNodoInicial(), b = ar.getNodoFinal();
         if (u >= 0 && u <= 1) {
             x = a.getX()+u*(b.getX()-a.getX());
