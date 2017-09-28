@@ -17,6 +17,8 @@ import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JPanel;
@@ -145,6 +147,38 @@ public class Controller {
                 
             }
         });
+    }
+
+    public void setGrafo() {
+        FileWriter fw = null;
+            try {
+                fw = new FileWriter("Libros.txt", false);
+                PrintWriter pw = new PrintWriter(fw);
+                String linea = "Vertice = x,y         Arco = x1,y1,x2,y2,distancia";
+                pw.print(linea);
+                pw.println();
+                for (Nodo nodo : grafo.getNodos()) {
+                    linea = nodo.toString();
+                    pw.print(linea);
+                    pw.println();
+                }
+                for (Arco arco :grafo.getArcos()) {
+                    linea = arco.toString();
+                    pw.print(linea);
+                    pw.println();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Error al guardar Grafo.txt ");
+            } finally {
+                try {
+                    if (fw != null) {
+                        fw.close();
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
     }
 
 }

@@ -77,7 +77,7 @@ public class Arco {
 
     @Override
     public String toString() {
-        return "Arco{" + "nodoInicial=" + nodoInicial + ", nodoFinal=" + nodoFinal + ", x1=" + x1 + ", y1=" + y1 + ", x2=" + x2 + ", y2=" + y2 + ", dist=" + dist + '}';
+        return x1 + "," + y1 + "," + x2 + "," + y2 + "," + dist;
     }
 
 }

@@ -5,10 +5,6 @@
  */
 package codigo.model;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 /**
@@ -92,6 +88,14 @@ public class Grafo {
         });
     }*/// </editor-fold>  
 
+    public ArrayList<Nodo> getNodos() {
+        return nodos;
+    }
+
+    public ArrayList<Arco> getArcos() {
+        return arcos;
+    }
+    
     public int getCantNodos(){
         return nodos.size();
     }

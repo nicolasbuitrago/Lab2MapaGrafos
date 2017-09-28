@@ -38,7 +38,7 @@ public class Nodo {
 
     @Override
     public String toString() {
-        return "Nodo{ x=" + x + ", y=" + y + '}';
+        return x + "," + y;
     }
 
     @Override
