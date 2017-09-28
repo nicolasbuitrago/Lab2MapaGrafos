@@ -121,9 +121,59 @@ public class Grafo {
             }
         }
         return nodoR;
+    }//https://luisrey.wordpress.com/2008/07/06/distancia-punto-1/
+    
+    public Nodo calcularRuta(Nodo ni, Nodo nf){
+        Arco a = arcoMasCercano(ni);
+        Nodo nodo = puntoP(a,factorU(ni,a));
+        return nodo;
     }
     
+    private Arco arcoMasCercano(Nodo ni){
+        Arco a = null;
+        int min = Integer.MAX_VALUE, d;
+        for (Arco arco : arcos) {
+            d = this.distanciaRectaPunto(ni, arco);
+            if(d<min){
+                min = d;
+                a= arco;
+            }
+        }
+        return a;
+    }
     
+    private double factorU(Nodo c, Arco ar){
+        Nodo a = ar.getNodoInicial(), b = ar.getNodoFinal();
+        double u;
+        u = ((c.getX() - a.getX()) * (b.getX() - a.getX()) + (c.getY() - a.getY()) * (b.getY() - a.getY()));
+        u = u / (Math.pow((b.getX() - a.getX()), 2) + Math.pow((b.getY() - a.getY()), 2));
+        return u;
+    }
+    
+    private Nodo puntoP(Arco ar,double u){
+        double x,y;
+        Nodo p = null, a = ar.getNodoInicial(), b = ar.getNodoFinal();
+        if (u >= 0 && u <= 1) {
+            x = a.getX()+u*(b.getX()-a.getX());
+            y = a.getY()+u*(b.getY()-a.getY());
+            p = new Nodo((int)x,(int)y);
+        }
+        return p;
+    }
+    
+    private int distanciaRectaPunto(Nodo c, Arco ar){
+        double u = factorU(c, ar),x,y;
+        double d = -1;
+        Nodo p, a = ar.getNodoInicial(), b = ar.getNodoFinal();
+        if (u >= 0 && u <= 1) {
+            x = a.getX()+u*(b.getX()-a.getX());
+            y = a.getY()+u*(b.getY()-a.getY());
+            p = new Nodo((int)x,(int)y);
+            y = Math.pow(b.getX()-a.getX(),2)+Math.pow(b.getY()-a.getY(),2);
+            d = ((b.getX()-a.getX())*(c.getY()-a.getY())-(b.getY()-a.getY())*(c.getX()-a.getX()))/Math.sqrt(y);
+        }
+        return (int)d;
+    }
     
      private void calcularMatriz(){
         matriz = new int [nodos.size()][nodos.size()];

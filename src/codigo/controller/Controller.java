@@ -34,10 +34,10 @@ public class Controller {
 
     public Controller() {
         this.grafo= new Grafo();
-        getGrafo();
+        getGrafo(); //Obtiene el grafo del archivo Grafo.txt
         this.ventana = new Ventana(this);
         this.graphics = new ControlGraphics(this.grafo,this.mapa);
-        this.graphics.paintMapa();
+        this.graphics.paintMapa(); //Dibuja el grafo sobre el mapa
     }
 
     public Mapa getMapa() {
@@ -166,8 +166,8 @@ public class Controller {
     }
     
     public void restablecer(){
-        this.ventana.dispose();
-        this.ventana = new Ventana(this);
+        this.graphics.restablecer();
+        this.graphics.paintMapa(); //Pinta el grafo sobre el mapa
     }
 
 }

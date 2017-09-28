@@ -52,6 +52,14 @@ public class Mapa extends JPanel {
         super.paintComponent(grafico);
     }
     
+    public void reset(){
+        try {
+            imagen = ImageIO.read(getClass().getResource("/Imagenes/mapa.png")); // la carga en una BufferedReader
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        this.repaint();
+    }
      
     public BufferedImage getImagen() {
         return imagen;

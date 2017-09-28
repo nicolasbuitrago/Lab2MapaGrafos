@@ -22,7 +22,7 @@ public class ControlGraphics {
     private Mapa mapa;
     private final int TAM_NODOS = 20;
     Nodo nodoInicial = null, nodoFinal = null;
-    public boolean isNodo = true;
+    public boolean isNodo = true, ruta = false;
 
     public ControlGraphics(Grafo grafo,Mapa mapa) {
         this.grafo = grafo;
@@ -120,13 +120,25 @@ public class ControlGraphics {
             nodoFinal = new Nodo(x- TAM_NODOS / 2,y- TAM_NODOS / 2);
             drawNodo(g,nodoFinal,"L");
         }
+        if(!ruta&&nodoFinal!=null){
+            ruta = true;
+            g.setColor(Color.blue);
+            drawNodo(g,grafo.calcularRuta(nodoInicial,nodoFinal));
+            paintRuta();
+        }
         
         g.dispose();
         mapa.repaint();
     }
-    
-    private void restablecer(){
+
+    private void paintRuta() {
         
+    }
+    
+    public void restablecer(){
+        nodoInicial = null;
+        nodoFinal = null;
+        mapa.reset();
     }
     
 }
