@@ -7,6 +7,7 @@ package codigo.controller;
 
 import codigo.model.Arco;
 import codigo.model.Grafo;
+import codigo.model.Mapa;
 import codigo.model.Nodo;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -47,11 +48,10 @@ public class ControlGraphics {
                 seleccionarNodo(nodoFinal, g, Color.YELLOW);
                 if (!nodoInicial.equals(nodoFinal)) {
                     g.setColor(Color.BLACK);
-                    g.drawLine(nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.x + TAM_NODOS / 2, nodoFinal.y + TAM_NODOS / 2);
-                    int dist = distancia(nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.x + TAM_NODOS / 2, nodoFinal.y + TAM_NODOS / 2);
-                    grafo.addArco(new Arco(nodoInicial, nodoFinal, nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.x + TAM_NODOS / 2, nodoFinal.y + TAM_NODOS / 2,
-                            dist));
-                    g.drawString(Integer.toString(distancia(nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.x + TAM_NODOS / 2, nodoFinal.y + TAM_NODOS / 2)), nodoInicial.getX() + dist / 2, nodoInicial.getY() + 5);
+                    g.drawLine(nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.getX() + TAM_NODOS / 2, nodoFinal.getY() + TAM_NODOS / 2);
+                    int dist = grafo.distancia(nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.getX() + TAM_NODOS / 2, nodoFinal.getY() + TAM_NODOS / 2);
+                    grafo.addArco(new Arco(nodoInicial, nodoFinal, TAM_NODOS,dist));
+                    g.drawString(Integer.toString(grafo.distancia(nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.getX() + TAM_NODOS / 2, nodoFinal.getY() + TAM_NODOS / 2)), nodoInicial.getX() + dist / 2, nodoInicial.getY() + 5);
                 } else {
                     seleccionarNodo(nodoInicial, g, Color.BLACK);
                 }
@@ -63,6 +63,7 @@ public class ControlGraphics {
                 nodoInicial = null;
             }
         }
+        mapa.repaint();
     }
     
     private void seleccionarNodo(Nodo nodo, Graphics2D g, Color color){

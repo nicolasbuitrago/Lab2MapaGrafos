@@ -13,13 +13,13 @@ public class Arco {
     int  x1,y1,x2,y2, dist;
     Nodo nodoInicial, nodoFinal;
 
-    public Arco(Nodo nodoInicial, Nodo nodoFinal, int x1, int y1, int x2, int y2, int dist) {
+    public Arco(Nodo nodoInicial, Nodo nodoFinal, int tamaño, int dist) {
         this.nodoInicial = nodoInicial;
         this.nodoFinal = nodoFinal;
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
+        this.x1 = nodoInicial.getX() + tamaño / 2;
+        this.y1 = nodoInicial.getY() + tamaño / 2;
+        this.x2 = nodoFinal.getX() + tamaño / 2;
+        this.y2 = nodoFinal.getY() + tamaño / 2;
         this.dist = dist;
     }
 

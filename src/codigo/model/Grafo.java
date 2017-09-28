@@ -19,7 +19,7 @@ public class Grafo {
     ArrayList<Nodo> nodos;
     ArrayList<Arco> arcos;
     int cantNodos = 0;
-    int TAM_NODOS = 30;
+    public int TAM_NODOS = 30;
     int matriz[][];
 
     public Grafo() {

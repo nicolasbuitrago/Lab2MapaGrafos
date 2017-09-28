@@ -35,7 +35,7 @@ public class Controller {
 
     public Controller() {
         this.grafo= new Grafo();
-        getGrafo();
+//        getGrafo();
         this.ventana = new Ventana(this);
         this.graphics = new ControlGraphics(this.grafo,this.mapa);
     }
@@ -83,7 +83,8 @@ public class Controller {
                 if(c.length==2){
                     grafo.addNodo(new Nodo(Integer.parseInt(c[0]),Integer.parseInt(c[1])));
                 }else{
-                    grafo.addArco(new Arco(toInt(c[0]),toInt(c[1]),toInt(c[2]),toInt(c[3]),toInt(c[4]),toInt(c[5]),toInt(c[6])));
+                    Nodo ni = grafo.buscarNodo(toInt(c[0]),toInt(c[1])), nf = grafo.buscarNodo(toInt(c[2]),toInt(c[3]));
+                    grafo.addArco(new Arco(ni,nf,grafo.TAM_NODOS,toInt(c[4])));
                 }
                 v = gra.readLine();
             }
@@ -114,12 +115,12 @@ public class Controller {
 //        g.drawImage(img, 0, 0, null);
 //        panel.repaint();
     }
-    public boolean arco = false;
+    public void arco(){graphics.isNodo=false;};
     private void listener(){
         this.mapa.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                crearGrafoMapa( e.getX(),e.getY());
+                graphics.crearGrafoMapa(e.getX(),e.getY());
             }
 
             @Override
@@ -143,8 +144,6 @@ public class Controller {
             }
         });
     }
-    
 
-    }
-    
 }
+

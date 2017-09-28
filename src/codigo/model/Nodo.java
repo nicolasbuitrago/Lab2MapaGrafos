@@ -11,7 +11,7 @@ package codigo.model;
  * @author nicolasbuitrago
  */
 public class Nodo {
-    private int x,y;
+    int x,y;
 //    Color color;
 
     public Nodo(int x, int y) {
@@ -38,7 +38,7 @@ public class Nodo {
 
     @Override
     public String toString() {
-        return "Nodo{" + "x=" + x + ", y=" + y + '}';
+        return "Nodo{ x=" + x + ", y=" + y + '}';
     }
 
     @Override
