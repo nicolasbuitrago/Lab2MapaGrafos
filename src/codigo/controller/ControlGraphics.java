@@ -76,6 +76,13 @@ public class ControlGraphics {
         g.fillOval(nodo.getX(), nodo.getY(), TAM_NODOS, TAM_NODOS);
     }
     
+    private void drawNodo(Graphics2D g,Nodo nodo, String s){
+        g.setColor(Color.red);
+        g.fillOval(nodo.getX(), nodo.getY(), TAM_NODOS, TAM_NODOS);
+        g.setColor(Color.white);
+        g.drawString(s, nodo.getX()+TAM_NODOS/2, nodo.getY()+TAM_NODOS/2);
+    }
+    
     private void drawArco(Graphics2D g,Arco arco){
         g.drawLine(arco.getX1(), arco.getY1(), arco.getX2(), arco.getY2());
     }
@@ -100,6 +107,21 @@ public class ControlGraphics {
 ////        panel.paintComponent(g);
 //        g.drawImage(img, 0, 0, null);
 //        panel.repaint();
+    }
+
+    void getPoints(int x, int y) {
+        Graphics2D g = this.mapa.getGraphics2D();
+//        g.setColor(Color.red);
+        if(nodoInicial == null){
+            nodoInicial = new Nodo(x- TAM_NODOS / 2,y- TAM_NODOS / 2);
+            drawNodo(g,nodoInicial,"P");
+        }else if(nodoFinal == null){
+            nodoFinal = new Nodo(x- TAM_NODOS / 2,y- TAM_NODOS / 2);
+            drawNodo(g,nodoFinal,"L");
+        }
+        
+        g.dispose();
+        mapa.repaint();
     }
     
 }
