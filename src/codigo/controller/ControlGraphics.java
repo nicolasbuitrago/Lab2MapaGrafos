@@ -72,4 +72,34 @@ public class ControlGraphics {
         g.drawOval(nodo.getX(), nodo.getY(), TAM_NODOS-1, TAM_NODOS -1);
     }
     
+    private void drawNodo(Graphics2D g,Nodo nodo){
+        g.fillOval(nodo.getX(), nodo.getY(), TAM_NODOS, TAM_NODOS);
+    }
+    
+    private void drawArco(Graphics2D g,Arco arco){
+        g.drawLine(arco.getX1(), arco.getY1(), arco.getX2(), arco.getY2());
+    }
+    
+    public void paintMapa() {
+        
+        // creamos una instancia graphics desde la imagen para pintar sobre ella
+        Graphics2D g = mapa.getGraphics2D();
+        g.setColor(Color.RED);
+        
+        for (Nodo nodo : grafo.getNodos()) {
+            drawNodo(g,nodo);
+        }
+        
+        for (Arco arco : grafo.getArcos()) {
+            drawArco(g,arco);
+        }
+        
+        g.dispose();
+        mapa.repaint();
+//        Graphics g = panel.getGraphics();
+////        panel.paintComponent(g);
+//        g.drawImage(img, 0, 0, null);
+//        panel.repaint();
+    }
+    
 }

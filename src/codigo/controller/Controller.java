@@ -10,8 +10,6 @@ import codigo.model.Grafo;
 import codigo.model.Mapa;
 import codigo.model.Nodo;
 import codigo.view.Ventana;
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedReader;
@@ -21,7 +19,6 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.JPanel;
 
 /**
  *
@@ -37,9 +34,10 @@ public class Controller {
 
     public Controller() {
         this.grafo= new Grafo();
-//        getGrafo();
+        getGrafo();
         this.ventana = new Ventana(this);
         this.graphics = new ControlGraphics(this.grafo,this.mapa);
+        this.graphics.paintMapa();
     }
 
     public Mapa getMapa() {
@@ -102,21 +100,6 @@ public class Controller {
             }
         }
     }
-
-    public void paintMapa(int x, int y) {
-        
-        // creamos una instancia graphics desde la imagen para pintar sobre ella
-        Graphics2D paint = mapa.getGraphics2D();
-        paint.setColor(Color.RED);
-        paint.drawString("Hola Mundo", x, y);
-        paint.fillRect(200, 200, 100, 100);
-        paint.dispose();
-        mapa.repaint();
-//        Graphics g = panel.getGraphics();
-////        panel.paintComponent(g);
-//        g.drawImage(img, 0, 0, null);
-//        panel.repaint();
-    }
     
     public void arco(){graphics.isNodo=false;};
     
@@ -124,7 +107,7 @@ public class Controller {
         this.mapa.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                graphics.crearGrafoMapa(e.getX(),e.getY());
+//                graphics.crearGrafoMapa(e.getX(),e.getY());
             }
 
             @Override
