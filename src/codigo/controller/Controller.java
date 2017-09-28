@@ -152,20 +152,20 @@ public class Controller {
     public void setGrafo() {
         FileWriter fw = null;
             try {
-                fw = new FileWriter("Libros.txt", false);
+                fw = new FileWriter("Grafo.txt", false);
                 PrintWriter pw = new PrintWriter(fw);
                 String linea = "Vertice = x,y         Arco = x1,y1,x2,y2,distancia";
                 pw.print(linea);
-                pw.println();
+//                pw.println();
                 for (Nodo nodo : grafo.getNodos()) {
                     linea = nodo.toString();
-                    pw.print(linea);
                     pw.println();
+                    pw.print(linea);
                 }
                 for (Arco arco :grafo.getArcos()) {
                     linea = arco.toString();
-                    pw.print(linea);
                     pw.println();
+                    pw.print(linea);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
