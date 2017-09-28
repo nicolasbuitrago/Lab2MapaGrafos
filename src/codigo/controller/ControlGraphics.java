@@ -34,7 +34,7 @@ public class ControlGraphics {
         if (isNodo) {
             g.setColor(Color.BLACK);
             g.fillOval( x - TAM_NODOS / 2, y - TAM_NODOS / 2, TAM_NODOS, TAM_NODOS);
-            grafo.addNodo(new Nodo( x - TAM_NODOS / 2, y - TAM_NODOS / 2));
+            grafo.addNodo(new Nodo( x - TAM_NODOS / 2, y - TAM_NODOS / 2));System.out.println(new Nodo( x - TAM_NODOS / 2, y - TAM_NODOS / 2));
             g.setColor(Color.white);
             g.drawString(Integer.toString(grafo.getCantNodos()),  x, y);
         } else if (nodoInicial == null) {

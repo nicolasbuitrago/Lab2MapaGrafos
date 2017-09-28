@@ -47,7 +47,8 @@ public class Mapa extends JPanel {
 //        pint.fillRect(200, 200, 100, 100);
 //        pint.dispose();
 
-        grafico.drawImage(imagen, 0, 0, height.width, height.height, null);
+//        grafico.drawImage(imagen, 0, 0, height.width, height.height, null);
+        grafico.drawImage(imagen, 0, 0, null);
 
         setOpaque(false);
         super.paintComponent(grafico);

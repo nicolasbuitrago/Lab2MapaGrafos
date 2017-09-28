@@ -7,6 +7,8 @@ package codigo.view;
 
 import codigo.controller.Controller;
 import codigo.model.Mapa;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  *
@@ -21,8 +23,12 @@ public class Ventana extends javax.swing.JFrame {
         control.setMapa(new Mapa(jpMapa));
         jpMapa.add(control.getMapa());
         jpMapa.repaint();
-        lblHoraActual.setText(control.horaActual());
         
+////        Graphics g = jpMapa.getGraphics();
+////        g.setColor(Color.red);
+////        g.drawRect(10, 50, 100,100);
+        
+        lblHoraActual.setText(control.horaActual());
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
