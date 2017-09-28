@@ -11,7 +11,7 @@ package codigo.model;
  * @author nicolasbuitrago
  */
 public class Nodo {
-    int x,y;
+    private int x,y;
 //    Color color;
 
     public Nodo(int x, int y) {
@@ -40,5 +40,35 @@ public class Nodo {
     public String toString() {
         return "Nodo{" + "x=" + x + ", y=" + y + '}';
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + this.x;
+        hash = 53 * hash + this.y;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Nodo other = (Nodo) obj;
+        if (this.x != other.x) {
+            return false;
+        }
+        if (this.y != other.y) {
+            return false;
+        }
+        return true;
+    }
+    
     
 }

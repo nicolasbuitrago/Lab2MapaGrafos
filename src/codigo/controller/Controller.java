@@ -11,18 +11,14 @@ import codigo.model.Mapa;
 import codigo.model.Nodo;
 import codigo.view.Ventana;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -35,11 +31,13 @@ public class Controller {
     private Grafo grafo;
     private Ventana ventana;
     private Mapa mapa;
+    private ControlGraphics graphics;
 
     public Controller() {
-        grafo= new Grafo();
+        this.grafo= new Grafo();
         getGrafo();
-        ventana = new Ventana(this);
+        this.ventana = new Ventana(this);
+        this.graphics = new ControlGraphics(this.grafo,this.mapa);
     }
 
     public Mapa getMapa() {
@@ -48,9 +46,8 @@ public class Controller {
 
     public void setMapa(Mapa mapa) {
         this.mapa = mapa;
+        listener();
     }
-
-    
     
     public String horaActual(){
         horaActual = LocalTime.now();
@@ -84,9 +81,9 @@ public class Controller {
             while (v != null) {                
                 String[] c = v.split(",");//System.out.println("c.length = "+c.length);
                 if(c.length==2){
-                    grafo.newNodo(new Nodo(Integer.parseInt(c[0]),Integer.parseInt(c[1])));
+                    grafo.addNodo(new Nodo(Integer.parseInt(c[0]),Integer.parseInt(c[1])));
                 }else{
-                    grafo.newArco(new Arco(toInt(c[0]),toInt(c[1]),toInt(c[2]),toInt(c[3]),toInt(c[4]),toInt(c[5]),toInt(c[6])));
+                    grafo.addArco(new Arco(toInt(c[0]),toInt(c[1]),toInt(c[2]),toInt(c[3]),toInt(c[4]),toInt(c[5]),toInt(c[6])));
                 }
                 v = gra.readLine();
             }
@@ -111,53 +108,18 @@ public class Controller {
         paint.drawString("Hola Mundo", x, y);
         paint.fillRect(200, 200, 100, 100);
         paint.dispose();
-        
+        mapa.repaint();
 //        Graphics g = panel.getGraphics();
 ////        panel.paintComponent(g);
 //        g.drawImage(img, 0, 0, null);
 //        panel.repaint();
     }
-    
-    public void crearGrafoMapa(JPanel panel){
-        panel.addMouseListener(new MouseListener() {
+    public boolean arco = false;
+    private void listener(){
+        this.mapa.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(rbNodo.isSelected()){
-                    g.setColor(Color.BLACK);
-                    g.fillOval(e.getX()-tamNodos/2, e.getY()-tamNodos/2, tamNodos, tamNodos);
-                    nodos.add(new Nodo(cantNodos,e.getX()-tamNodos/2,e.getY()-tamNodos/2,Color.red));
-                    g.setColor(Color.white);
-                    g.drawString(Integer.toString(cantNodos),e.getX(), e.getY());
-                    cantNodos++;
-                }else{
-                    if(nodoInicial==null){
-                        nodoInicial = buscarNodo(e.getX(),e.getY());
-                        if(nodoInicial!=null){
-                            seleccionarNodo(nodoInicial,g,Color.YELLOW);
-                        }
-                    }else{
-                        nodoFinal = buscarNodo(e.getX(),e.getY());
-                        if(nodoFinal!=null){
-                            seleccionarNodo(nodoFinal,g,Color.YELLOW);
-                            if(nodoFinal.getName()!=nodoInicial.getName()){
-                                g.setColor(Color.BLACK);
-                                g.drawLine(nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2);
-                                int dist = distancia(nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2);
-                                arcos.add(new Arco(nodoInicial.getName(),nodoFinal.name,nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2,
-                                dist));
-                                 g.drawString(Integer.toString(distancia(nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2)),nodoInicial.x+dist/2,nodoInicial.y+5);
-                            }else{
-                                seleccionarNodo(nodoInicial,g,Color.BLACK);
-                            }
-                            seleccionarNodo(nodoInicial,g,Color.BLACK);
-                            seleccionarNodo(nodoFinal,g,Color.BLACK);
-                            nodoInicial = null;
-                        }else{
-                            seleccionarNodo(nodoInicial,g,Color.BLACK);
-                            nodoInicial = null;
-                        }
-                    }
-                }
+                crearGrafoMapa( e.getX(),e.getY());
             }
 
             @Override
@@ -177,9 +139,12 @@ public class Controller {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                 
+                
             }
         });
+    }
+    
+
     }
     
 }

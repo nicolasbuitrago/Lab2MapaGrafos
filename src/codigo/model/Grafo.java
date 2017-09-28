@@ -19,8 +19,7 @@ public class Grafo {
     ArrayList<Nodo> nodos;
     ArrayList<Arco> arcos;
     int cantNodos = 0;
-    Nodo nodoInicial = null, nodoFinal = null;
-    int tamNodos = 30;
+    int TAM_NODOS = 30;
     int matriz[][];
 
     public Grafo() {
@@ -92,12 +91,16 @@ public class Grafo {
             }
         });
     }*/// </editor-fold>  
+
+    public int getCantNodos(){
+        return nodos.size();
+    }
     
-    public void newNodo(Nodo nodo){
+    public void addNodo(Nodo nodo){
         nodos.add(nodo);
     }
 
-    public void newArco(Arco arco){
+    public void addArco(Arco arco){
         arcos.add(arco);
     }
     
@@ -105,10 +108,10 @@ public class Grafo {
         return (int) Math.sqrt(Math.pow(x2-x1, 2.0)+Math.pow(y2-y1, 2.0));
     }
     
-    private Nodo buscarNodo(int x, int y){
+    public Nodo buscarNodo(int x, int y){
         Nodo nodoR = null;
         for (Nodo nodo : nodos) {
-            if (x>=nodo.x && y>= nodo.y && x<=nodo.x+tamNodos && y <=nodo.y+tamNodos) {
+            if (x>=nodo.x && y>= nodo.y && x<=nodo.x+TAM_NODOS && y <=nodo.y+TAM_NODOS) {
                 nodoR= nodo;
                 break;
             }
@@ -116,10 +119,7 @@ public class Grafo {
         return nodoR;
     }
     
-    private void seleccionarNodo(Nodo nodo, Graphics g, Color color){
-        g.setColor(color);
-        g.drawOval(nodo.x, nodo.y, tamNodos-1, tamNodos -1);
-    }
+    
     
      private void calcularMatriz(){
         matriz = new int [nodos.size()][nodos.size()];
@@ -165,5 +165,7 @@ public class Grafo {
          }
          return false;
     }
+     
+     
     
 }

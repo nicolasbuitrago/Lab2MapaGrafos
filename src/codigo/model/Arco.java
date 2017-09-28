@@ -10,9 +10,10 @@ package codigo.model;
  * @author nicolasbuitrago
  */
 public class Arco {
-    int nodoInicial, nodoFinal, x1,y1,x2,y2, dist;
+    int  x1,y1,x2,y2, dist;
+    Nodo nodoInicial, nodoFinal;
 
-    public Arco(int nodoInicial, int nodoFinal, int x1, int y1, int x2, int y2, int dist) {
+    public Arco(Nodo nodoInicial, Nodo nodoFinal, int x1, int y1, int x2, int y2, int dist) {
         this.nodoInicial = nodoInicial;
         this.nodoFinal = nodoFinal;
         this.x1 = x1;
@@ -22,20 +23,24 @@ public class Arco {
         this.dist = dist;
     }
 
-    public int getNodoInicial() {
+    public Nodo getNodoInicial() {
         return nodoInicial;
     }
 
-    public void setNodoInicial(int nodoInicial) {
+    public void setNodoInicial(Nodo nodoInicial) {
         this.nodoInicial = nodoInicial;
     }
 
-    public int getNodoFinal() {
+    public Nodo getNodoFinal() {
         return nodoFinal;
     }
 
-    public void setNodoFinal(int nodoFinal) {
+    public void setNodoFinal(Nodo nodoFinal) {
         this.nodoFinal = nodoFinal;
+    }
+
+    public int getDist() {
+        return dist;
     }
 
     public int getX1() {

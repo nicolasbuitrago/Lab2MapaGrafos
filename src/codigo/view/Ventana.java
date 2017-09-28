@@ -22,6 +22,7 @@ public class Ventana extends javax.swing.JFrame {
         jpMapa.add(control.getMapa());
         jpMapa.repaint();
         lblHoraActual.setText(control.horaActual());
+        
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
@@ -208,8 +209,9 @@ public class Ventana extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        control.paintMapa(100, 50);
-        jpMapa.repaint();
+//        control.paintMapa(100, 50);
+        control.arco = true;
+////        jpMapa.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
