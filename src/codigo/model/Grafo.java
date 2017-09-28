@@ -128,8 +128,8 @@ public class Grafo {
      private void calcularMatriz(){
         matriz = new int [nodos.size()][nodos.size()];
         for (Arco arco : arcos) {
-            matriz[arco.nodoInicial][arco.nodoFinal] = arco.dist;
-            matriz[arco.nodoFinal][arco.nodoInicial] = arco.dist;
+//            matriz[arco.nodoInicial][arco.nodoFinal] = arco.dist;
+//            matriz[arco.nodoFinal][arco.nodoInicial] = arco.dist;
         }
         prim();
     }
