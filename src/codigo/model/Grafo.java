@@ -167,7 +167,7 @@ public class Grafo {
     
     private int distanciaRectaPunto(Nodo c, Arco ar){
         double u = factorU(c, ar),x,y;//   System.out.println("u = "+u);
-        double d = -1;
+        double d = Integer.MAX_VALUE;
         Nodo p, a = ar.getNodoInicial(), b = ar.getNodoFinal();
         if (u >= 0 && u <= 1) {
             x = a.getX()+u*(b.getX()-a.getX());
@@ -222,6 +222,17 @@ public class Grafo {
              }
          }
          return false;
+    }
+     
+    private int nearestarc (Nodo p, Arco arc){
+        int n = 0;
+        
+        Nodo a=arc.nodoInicial,b=arc.nodoFinal;
+        
+        double d1=Math.sqrt(Math.pow(p.x-a.x,2)+Math.pow(p.y-a.y,2));
+        
+        
+        return n;
     }
      
      
