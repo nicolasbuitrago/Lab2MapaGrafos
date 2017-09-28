@@ -103,21 +103,18 @@ public class Controller {
         }
     }
 
-    public void paintMapa(JPanel panel) {
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(getClass().getResource("/Imagenes/mapa.png")); // la carga en una BufferedReader
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void paintMapa(int x, int y) {
+        
         // creamos una instancia graphics desde la imagen para pintar sobre ella
-        Graphics2D pint = img.createGraphics();
-        pint.setColor(Color.GREEN);
-        pint.fillRect(200, 200, 100, 100);
-        pint.dispose();
-        Graphics g = panel.getGraphics();
-//        panel.paintComponent(g);
-        g.drawImage(img, 0, 0, null);
+        Graphics2D paint = mapa.getGraphics2D();
+        paint.setColor(Color.RED);
+        paint.drawString("Hola Mundo", x, y);
+        paint.fillRect(200, 200, 100, 100);
+        paint.dispose();
+        
+//        Graphics g = panel.getGraphics();
+////        panel.paintComponent(g);
+//        g.drawImage(img, 0, 0, null);
 //        panel.repaint();
     }
     

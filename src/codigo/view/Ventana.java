@@ -14,6 +14,8 @@ import codigo.model.Mapa;
  */
 public class Ventana extends javax.swing.JFrame {
     
+    Controller control;
+    
     public Ventana(Controller control) {
         initComponents();
         control.setMapa(new Mapa(jpMapa));
@@ -23,6 +25,7 @@ public class Ventana extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
+        this.control = control;
     }
             
 
@@ -96,6 +99,11 @@ public class Ventana extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton1.setText("Restablecer");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton2.setText("Salir");
@@ -198,6 +206,11 @@ public class Ventana extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        control.paintMapa(100, 50);
+        jpMapa.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

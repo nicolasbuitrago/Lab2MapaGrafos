@@ -29,15 +29,15 @@ public class Mapa extends JPanel {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        
         this.setSize(padre.getWidth(), padre.getHeight()); //se selecciona el tamaño del panel
     }
 
 //Se crea un método cuyo parámetro debe ser un objeto Graphics
+    @Override
     public void paint(Graphics grafico) {
         Dimension height = getSize();
 //Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
-        ImageIcon Img = new ImageIcon(getClass().getResource("/Imagenes/mapa.png"));
+//        ImageIcon Img = new ImageIcon(getClass().getResource("/Imagenes/mapa.png"));
 
 //se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
 //        grafico.drawImage(Img.getImage(), 0, 0, null);
@@ -48,13 +48,19 @@ public class Mapa extends JPanel {
 //        pint.dispose();
 
         grafico.drawImage(imagen, 0, 0, height.width, height.height, null);
-        
-        
 
         setOpaque(false);
         super.paintComponent(grafico);
     }
     
+     
+    public BufferedImage getImagen() {
+        return imagen;
+    }
+    
+    public Graphics2D getGraphics2D() {
+        return imagen.createGraphics();
+    }
     
 //    private BufferedImage img = null;
 //
@@ -80,4 +86,6 @@ public class Mapa extends JPanel {
 //        super.paintComponent(g);
 //        g.drawImage(img, 0, 0, null); // dibuja la imagen al iniciar la aplicacion
 //    }
+
+    
 }
