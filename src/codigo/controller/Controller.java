@@ -122,7 +122,7 @@ public class Controller {
         this.mapa.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                graphics.crearGrafoMapa(e.getX(),e.getY());System.out.println("e = "+e.getX()+", "+e.getY());
+                graphics.crearGrafoMapa(e.getX(),e.getY());
             }
 
             @Override
