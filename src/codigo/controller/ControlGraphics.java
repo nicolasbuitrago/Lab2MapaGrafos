@@ -84,7 +84,7 @@ public class ControlGraphics {
         
         // creamos una instancia graphics desde la imagen para pintar sobre ella
         Graphics2D g = mapa.getGraphics2D();
-        g.setColor(Color.RED);
+        g.setColor(Color.BLACK);
         
         for (Nodo nodo : grafo.getNodos()) {
             drawNodo(g,nodo);
