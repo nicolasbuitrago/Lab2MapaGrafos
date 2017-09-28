@@ -9,6 +9,7 @@ import codigo.model.Arco;
 import codigo.model.Grafo;
 import codigo.model.Mapa;
 import codigo.model.Nodo;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -93,7 +94,7 @@ public class ControlGraphics {
         // creamos una instancia graphics desde la imagen para pintar sobre ella
         Graphics2D g = mapa.getGraphics2D();
         g.setColor(Color.BLACK);
-        
+        g.setStroke(new BasicStroke(5));
         for (Nodo nodo : grafo.getNodos()) {
             drawNodo(g,nodo);
         }
@@ -122,8 +123,10 @@ public class ControlGraphics {
         }
         if(!ruta&&nodoFinal!=null){
             ruta = true;
-            g.setColor(Color.blue);
+            g.setColor(Color.red);
+            g.setStroke(new BasicStroke(5));
             drawNodo(g,grafo.calcularRuta(nodoInicial,nodoFinal));
+            drawArco(g,grafo.a);System.out.println("a = "+grafo.a);
             paintRuta();
         }
         
@@ -138,6 +141,7 @@ public class ControlGraphics {
     public void restablecer(){
         nodoInicial = null;
         nodoFinal = null;
+        ruta = false;
         mapa.reset();
     }
     

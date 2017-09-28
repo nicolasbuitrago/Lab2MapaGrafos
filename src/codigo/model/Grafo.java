@@ -5,6 +5,8 @@
  */
 package codigo.model;
 
+import codigo.controller.ControlGraphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +14,7 @@ import java.util.ArrayList;
  * @author Estudiante
  */
 public class Grafo {
-    ArrayList<Nodo> nodos;
+    ArrayList<Nodo> nodos;    Nodo p;   public Arco a;
     ArrayList<Arco> arcos;
     int cantNodos = 0;
     public int TAM_NODOS = 20;
@@ -125,7 +127,9 @@ public class Grafo {
     
     public Nodo calcularRuta(Nodo ni, Nodo nf){
         Arco a = arcoMasCercano(ni);
-        Nodo nodo = puntoP(a,factorU(ni,a));
+        this.a = a;
+//        Nodo nodo = puntoP(a,factorU(ni,a));
+        Nodo nodo = p;
         return nodo;
     }
     
@@ -134,11 +138,11 @@ public class Grafo {
         int min = Integer.MAX_VALUE, d;
         for (Arco arco : arcos) {
             d = this.distanciaRectaPunto(ni, arco);
-            if(d<min){
+            if(Math.abs(d)<min){
                 min = d;
                 a= arco;
             }
-        }
+        }System.out.println("min = "+min);
         return a;
     }
     
@@ -153,22 +157,22 @@ public class Grafo {
     private Nodo puntoP(Arco ar,double u){
         double x,y;
         Nodo p = null, a = ar.getNodoInicial(), b = ar.getNodoFinal();
-        if (u >= 0 && u <= 1) {
+//        if (u >= 0 && u <= 1) {
             x = a.getX()+u*(b.getX()-a.getX());
             y = a.getY()+u*(b.getY()-a.getY());
-            p = new Nodo((int)x,(int)y);
-        }
+            p = new Nodo((int)x,(int)y);System.out.println("p = "+p+"\n ar= "+ar);
+//        }
         return p;
     }
     
     private int distanciaRectaPunto(Nodo c, Arco ar){
-        double u = factorU(c, ar),x,y;
+        double u = factorU(c, ar),x,y;//   System.out.println("u = "+u);
         double d = -1;
         Nodo p, a = ar.getNodoInicial(), b = ar.getNodoFinal();
         if (u >= 0 && u <= 1) {
             x = a.getX()+u*(b.getX()-a.getX());
             y = a.getY()+u*(b.getY()-a.getY());
-            p = new Nodo((int)x,(int)y);
+            p = new Nodo((int)x,(int)y); System.out.println("pd = "+p); this.p = p;
             y = Math.pow(b.getX()-a.getX(),2)+Math.pow(b.getY()-a.getY(),2);
             d = ((b.getX()-a.getX())*(c.getY()-a.getY())-(b.getY()-a.getY())*(c.getX()-a.getX()))/Math.sqrt(y);
         }

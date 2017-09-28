@@ -140,7 +140,6 @@ public class Controller {
             PrintWriter pw = new PrintWriter(fw);
             String linea = "Vertice = x,y         Arco = x1,y1,x2,y2,distancia";
             pw.print(linea);
-//                pw.println();
             for (Nodo nodo : grafo.getNodos()) {
                 linea = nodo.toString();
                 pw.println();
