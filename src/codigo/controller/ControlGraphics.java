@@ -37,7 +37,8 @@ public class ControlGraphics {
             g.fillOval( x - TAM_NODOS / 2, y - TAM_NODOS / 2, TAM_NODOS, TAM_NODOS);
             grafo.addNodo(new Nodo( x - TAM_NODOS / 2, y - TAM_NODOS / 2));
             g.setColor(Color.white);
-            g.drawString(Integer.toString(grafo.getCantNodos()),  x, y);
+//            g.drawString(Integer.toString(grafo.getCantNodos()),  x, y);
+            g.drawString(Integer.toString(grafo.getCantNodos()), (x - TAM_NODOS / 2)+TAM_NODOS/2.5f, (y - TAM_NODOS / 2)+TAM_NODOS/1.4f);
         } else if (nodoInicial == null) {
             nodoInicial = grafo.buscarNodo( x, y);
             if (nodoInicial != null) {
