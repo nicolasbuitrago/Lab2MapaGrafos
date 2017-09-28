@@ -101,7 +101,7 @@ public class Controller {
         }
     }
     
-    public void arco(){graphics.isNodo=false;};
+    public void nodo(){graphics.isNodo=!graphics.isNodo;};
     
     private void listener(){
         this.mapa.addMouseListener(new MouseListener(){
@@ -135,34 +135,39 @@ public class Controller {
 
     public void setGrafo() {
         FileWriter fw = null;
-            try {
-                fw = new FileWriter("Grafo.txt", false);
-                PrintWriter pw = new PrintWriter(fw);
-                String linea = "Vertice = x,y         Arco = x1,y1,x2,y2,distancia";
-                pw.print(linea);
+        try {
+            fw = new FileWriter("Grafo.txt", false);
+            PrintWriter pw = new PrintWriter(fw);
+            String linea = "Vertice = x,y         Arco = x1,y1,x2,y2,distancia";
+            pw.print(linea);
 //                pw.println();
-                for (Nodo nodo : grafo.getNodos()) {
-                    linea = nodo.toString();
-                    pw.println();
-                    pw.print(linea);
-                }
-                for (Arco arco :grafo.getArcos()) {
-                    linea = arco.toString();
-                    pw.println();
-                    pw.print(linea);
+            for (Nodo nodo : grafo.getNodos()) {
+                linea = nodo.toString();
+                pw.println();
+                pw.print(linea);
+            }
+            for (Arco arco : grafo.getArcos()) {
+                linea = arco.toString();
+                pw.println();
+                pw.print(linea);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error al guardar Grafo.txt ");
+        } finally {
+            try {
+                if (fw != null) {
+                    fw.close();
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-                System.out.println("Error al guardar Grafo.txt ");
-            } finally {
-                try {
-                    if (fw != null) {
-                        fw.close();
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
             }
+        }
+    }
+    
+    public void restablecer(){
+        this.ventana.dispose();
+        this.ventana = new Ventana(this);
     }
 
 }

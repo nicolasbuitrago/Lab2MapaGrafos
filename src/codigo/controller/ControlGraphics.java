@@ -20,7 +20,7 @@ public class ControlGraphics {
     
     private Grafo grafo;
     private Mapa mapa;
-    private final int TAM_NODOS = 30;
+    private final int TAM_NODOS = 20;
     Nodo nodoInicial = null, nodoFinal = null;
     public boolean isNodo = true;
 
@@ -80,7 +80,8 @@ public class ControlGraphics {
         g.setColor(Color.red);
         g.fillOval(nodo.getX(), nodo.getY(), TAM_NODOS, TAM_NODOS);
         g.setColor(Color.white);
-        g.drawString(s, nodo.getX()+TAM_NODOS/2, nodo.getY()+TAM_NODOS/2);
+        g.drawString(s, nodo.getX()+TAM_NODOS/2.5f, nodo.getY()+TAM_NODOS/1.4f);
+//        g.drawString(s, nodo.getX(), nodo.getY());
     }
     
     private void drawArco(Graphics2D g,Arco arco){
@@ -109,7 +110,7 @@ public class ControlGraphics {
 //        panel.repaint();
     }
 
-    void getPoints(int x, int y) {
+    public void getPoints(int x, int y) {
         Graphics2D g = this.mapa.getGraphics2D();
 //        g.setColor(Color.red);
         if(nodoInicial == null){
@@ -122,6 +123,10 @@ public class ControlGraphics {
         
         g.dispose();
         mapa.repaint();
+    }
+    
+    private void restablecer(){
+        
     }
     
 }
