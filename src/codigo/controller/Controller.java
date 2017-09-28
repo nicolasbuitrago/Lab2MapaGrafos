@@ -115,7 +115,9 @@ public class Controller {
 //        g.drawImage(img, 0, 0, null);
 //        panel.repaint();
     }
+    
     public void arco(){graphics.isNodo=false;};
+    
     private void listener(){
         this.mapa.addMouseListener(new MouseListener(){
             @Override

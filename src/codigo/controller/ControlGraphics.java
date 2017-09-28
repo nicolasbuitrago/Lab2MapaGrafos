@@ -63,6 +63,7 @@ public class ControlGraphics {
                 nodoInicial = null;
             }
         }
+        g.dispose();
         mapa.repaint();
     }
     
