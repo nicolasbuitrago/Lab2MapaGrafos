@@ -119,6 +119,10 @@ public class Grafo {
         return (int) Math.sqrt(Math.pow(x2-x1, 2.0)+Math.pow(y2-y1, 2.0));
     }
     
+    public int distancia(Nodo i, Nodo f){
+        return (int) Math.sqrt(Math.pow(f.getX()-i.getX(), 2.0)+Math.pow(f.getY()-i.getY(), 2.0));
+    }
+    
     public Nodo buscarNodo(int x, int y){
         Nodo nodoR = null;
         for (Nodo nodo : nodos) {
@@ -141,6 +145,7 @@ public class Grafo {
         Nodo nodoi = puntoP(ai,factorU(ni,ai)),
                 nodof = puntoP(af,factorU(nf,af));
         ArrayList ruta = new ArrayList();
+        this.dijkstra(nodos.get(1), nodos.get(47));
         ruta.add(nodoi);
         ruta.add(ai);
         ruta.add(af);
@@ -217,11 +222,12 @@ public class Grafo {
                    adicionar(cola,(v, distancia[v]))
     
     */
-    private int[][] adyacencia ;
+    private int[][] adyacencia;
     private int[] distancia = new int[100];
     private Nodo[] padre = new Nodo[100];
     private boolean[] visto = new boolean[100];
     private ArrayList dijkstra(Nodo ni,Nodo nf){
+        ArrayList ruta = new ArrayList();adyacencia();System.out.println("\n\n\n\n");
         for (Nodo nodo : nodos) {
             int i = nodos.indexOf(nodo);
             distancia[i] = Integer.MAX_VALUE;
@@ -235,14 +241,18 @@ public class Grafo {
             Nodo nod = extraerMinimo(cola);
             int u = nodos.indexOf(nod);
             visto[nodos.indexOf(nod)] = true;
-            for (int v : adyacencia[u]) {
-                if (!visto[u]&&distancia[v] > distancia[u]) {
-                    distancia[v]=distancia[u];
-                    padre[v]=nodos.get(v);
-                    cola.add(nodos.get(v));
+            for (int j = 0; j < nodos.size(); j++) {
+                if(adyacencia[nodos.indexOf(nod)][j] == 1 && !visto[u] && distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
+                    distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
+                    padre[j]=nodos.get(j);
+                    cola.add(nodos.get(j));
                 }
             }
         }
+        for (int i = 0; i < nodos.size(); i++) {
+            System.out.print(nodos.indexOf(padre[i])+" ");
+        }
+        return ruta;
     }
     
     public void adyacencia(){
@@ -273,19 +283,38 @@ public class Grafo {
     }
    
     private Nodo extraerMinimo(ArrayList<Nodo> n){
-        int min = Integer.MAX_VALUE-1, i=-1;
+        int min = Integer.MAX_VALUE; Nodo nod= null;
         for (Nodo nodo : n) {
-            if (min<distancia[nodos.indexOf(nodo)]) {
-                min = distancia[nodos.indexOf(nodo)];
-                i = nodos.indexOf(nodo);
+            for (int j = 0; j < nodos.size(); j++) {
+                if(adyacencia[nodos.indexOf(nodo)][j] == 1){
+                    if(distancia(nodo,nodos.get(j))<min){
+                        min = distancia(nodo,nodos.get(j));
+                        nod = nodos.get(j);
+                    }
+                }
             }
         }
-        Nodo nodo = nodos.get(i);
-        nodos.remove(i);
-        return nodo;
+        n.remove(nod);
+        return nod;
     }
     
     /*
+    private Nodo extraerMinimo(ArrayList<Nodo> n){
+        int min = Integer.MAX_VALUE, i=-1;
+        for (Nodo nodo : n) {
+            if (distancia[nodos.indexOf(nodo)]<min) {
+                min = distancia[nodos.indexOf(nodo)];
+                i = n.indexOf(nodo);
+            }
+        }
+        Nodo nodo = nodos.get(i);
+        n.remove(i);
+        return nodo;
+    }
+    
+    
+    
+    
     function Dijkstra(Graph, source):
 2      dist[source] ← 0                                    // Initialization
 3

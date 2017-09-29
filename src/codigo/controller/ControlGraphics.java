@@ -97,12 +97,11 @@ public class ControlGraphics {
         Graphics2D g = mapa.getGraphics2D();
         g.setColor(Color.BLACK);
         g.setStroke(new BasicStroke(5));
-        for (Nodo nodo : grafo.getNodos()) {
-            drawNodo(g,nodo);
-        }
-        
         for (Arco arco : grafo.getArcos()) {
             drawArco(g,arco);
+        }
+        for (Nodo nodo : grafo.getNodos()) {
+            drawNodo(g,nodo,Integer.toString(grafo.getNodos().indexOf(nodo)));
         }
         
         g.dispose();
@@ -123,7 +122,7 @@ public class ControlGraphics {
             nodoFinal = new Nodo(x- TAM_NODOS / 2,y- TAM_NODOS / 2);
             drawNodo(g,nodoFinal,"L");
         }
-        if(!ruta&&nodoFinal!=null){
+        else if(!ruta&&nodoFinal!=null){
             ruta = true;
             g.setColor(Color.blue);
             g.setStroke(new BasicStroke(5));

@@ -69,6 +69,11 @@ public class Nodo {
         }
         return true;
     }
+
+    public Nodo clone(){
+        Nodo clone = new Nodo(this.x,this.y);
+        return clone;
+    }
     
-    
+       
 }
