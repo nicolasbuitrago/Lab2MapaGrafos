@@ -128,15 +128,14 @@ public class ControlGraphics {
             g.setColor(Color.blue);
             g.setStroke(new BasicStroke(5));
 ////            drawNodo(g,grafo.calcularRuta(nodoInicial,nodoFinal));
-            paintRuta(grafo.calcularRuta(nodoInicial,nodoFinal));
-            drawArco(g,grafo.ai);
+            paintRuta(g,grafo.calcularRuta(nodoInicial,nodoFinal));
+//            drawArco(g,grafo.ai);
         }
         g.dispose();
         mapa.repaint();
     }
 
-    private void paintRuta(ArrayList ruta) {
-        Graphics2D g = this.mapa.getGraphics2D();
+    private void paintRuta(Graphics2D g,ArrayList ruta) {
         g.setColor(Color.blue);
         g.setStroke(new BasicStroke(5));
         for (Object obj : ruta){ 
@@ -145,11 +144,7 @@ public class ControlGraphics {
             }else{
                 drawArco(g,(Arco)obj);
             }
-            
-            
         }
-        g.dispose();
-        mapa.repaint();
     }
     
     public void restablecer(){

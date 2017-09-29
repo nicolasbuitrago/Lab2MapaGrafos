@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Estudiante
  */
 public class Grafo {
-    ArrayList<Nodo> nodos;   public Arco ai;     // Nodo p;
+    ArrayList<Nodo> nodos;   //public Arco ai;      Nodo p;
     ArrayList<Arco> arcos;
     int cantNodos = 0;
     public int TAM_NODOS = 20;
@@ -117,7 +117,7 @@ public class Grafo {
     public Nodo buscarNodo(int x, int y){
         Nodo nodoR = null;
         for (Nodo nodo : nodos) {
-            if (x>=nodo.x && y>= nodo.y && x<=nodo.x+TAM_NODOS && y <=nodo.y+TAM_NODOS) {
+            if (x>=nodo.getX() && y>= nodo.getY() && x<=nodo.getX()+TAM_NODOS && y <=nodo.getY()+TAM_NODOS) {
                 nodoR= nodo;
                 break;
             }
@@ -125,17 +125,29 @@ public class Grafo {
         return nodoR;
     }
     
+    /**
+     * Funcion que se encarga de hallar la ruta mas corta del punto de partida al punto de llegada
+     * @param ni Nodo inicial que es marcado en el mapa como el punto de partida
+     * @param nf Nodo final que es marcado en el mapa como punto de llegada
+     * @return un ArrayList que almacena la ruta mas corta
+     */
     public ArrayList calcularRuta(Nodo ni, Nodo nf){
         Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);
-        this.ai = ai;
         Nodo nodoi = puntoP(ai,factorU(ni,ai)),
                 nodof = puntoP(af,factorU(nf,af));
         ArrayList ruta = new ArrayList();
         ruta.add(nodoi);
+        ruta.add(ai);
+        ruta.add(af);
         ruta.add(nodof);
         return ruta;
     }
     
+    /**
+     * Funcion que se encarga de encontrar el Arco mas cercano al nodo que se le pasa por parametro
+     * @param ni el nodo del cual se quiere encontrar el arco mas cercano
+     * @return el arco mas cercano al nodo ni
+     */
     private Arco arcoMasCercano(Nodo ni){
         Arco a = null;
         int min = Integer.MAX_VALUE, d;
@@ -173,8 +185,8 @@ public class Grafo {
         double d = Integer.MAX_VALUE;
         Nodo p, a = ar.getNodoInicial(), b = ar.getNodoFinal();
         if (u >= 0 && u <= 1) {
-            x = a.getX()+u*(b.getX()-a.getX());
-            y = a.getY()+u*(b.getY()-a.getY());
+//            x = a.getX()+u*(b.getX()-a.getX());
+//            y = a.getY()+u*(b.getY()-a.getY());
 //            p = new Nodo((int)x,(int)y); System.out.println("pd = "+p); this.p = p;
             y = Math.pow(b.getX()-a.getX(),2)+Math.pow(b.getY()-a.getY(),2);
             d = ((b.getX()-a.getX())*(c.getY()-a.getY())-(b.getY()-a.getY())*(c.getX()-a.getX()))/Math.sqrt(y);
@@ -185,8 +197,8 @@ public class Grafo {
      private void calcularMatriz(){
         matriz = new int [nodos.size()][nodos.size()];
         for (Arco arco : arcos) {
-//            matriz[arco.nodoInicial][arco.nodoFinal] = arco.dist;
-//            matriz[arco.nodoFinal][arco.nodoInicial] = arco.dist;
+//            matriz[arco.getNodoInicial()][arco.getNodoFinal()] = arco.dist;
+//            matriz[arco.getNodoFinal()][arco.getNodoInicial()] = arco.dist;
         }
         prim();
     }
@@ -226,19 +238,5 @@ public class Grafo {
          }
          return false;
     }
-     
-    private int nearestarc (Nodo p, Arco arc){
-        int n = 0;
-        
-        Nodo a=arc.nodoInicial,b=arc.nodoFinal;
-        
-        double d1=Math.sqrt(Math.pow(p.x-a.x,2)+Math.pow(p.y-a.y,2));
-        
-        
-        return n;
-    }
-     
-     
-    
 }
 
