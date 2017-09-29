@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Estudiante
  */
 public class Grafo {
-    ArrayList<Nodo> nodos;   public Arco a;     // Nodo p;
+    ArrayList<Nodo> nodos;   public Arco ai;     // Nodo p;
     ArrayList<Arco> arcos;
     int cantNodos = 0;
     public int TAM_NODOS = 20;
@@ -123,14 +123,17 @@ public class Grafo {
             }
         }
         return nodoR;
-    }//https://luisrey.wordpress.com/2008/07/06/distancia-punto-1/
+    }
     
-    public Nodo calcularRuta(Nodo ni, Nodo nf){
-        Arco a = arcoMasCercano(ni);
-        this.a = a;
-        Nodo nodo = puntoP(a,factorU(ni,a));System.out.println("nodo = "+nodo);
-////        Nodo nodop = p;
-        return nodo;
+    public ArrayList calcularRuta(Nodo ni, Nodo nf){
+        Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);
+        this.ai = ai;
+        Nodo nodoi = puntoP(ai,factorU(ni,ai)),
+                nodof = puntoP(af,factorU(nf,af));
+        ArrayList ruta = new ArrayList();
+        ruta.add(nodoi);
+        ruta.add(nodof);
+        return ruta;
     }
     
     private Arco arcoMasCercano(Nodo ni){
@@ -142,7 +145,7 @@ public class Grafo {
                 min = d;
                 a= arco;
             }
-        }System.out.println("min = "+min);
+        } //System.out.println("min = "+min);
         return a;
     }
     
@@ -160,7 +163,7 @@ public class Grafo {
 //        if (u >= 0 && u <= 1) {
             x = a.getX()+u*(b.getX()-a.getX());
             y = a.getY()+u*(b.getY()-a.getY());
-            p = new Nodo((int)x,(int)y);System.out.println("p = "+p+"\n ar= "+ar);
+            p = new Nodo((int)x,(int)y);    //System.out.println("p = "+p+"\n ar= "+ar);
 //        }
         return p;
     }

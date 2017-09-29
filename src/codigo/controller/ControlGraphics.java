@@ -12,6 +12,7 @@ import codigo.model.Nodo;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 /**
  *
@@ -126,16 +127,29 @@ public class ControlGraphics {
             ruta = true;
             g.setColor(Color.blue);
             g.setStroke(new BasicStroke(5));
-            drawNodo(g,grafo.calcularRuta(nodoInicial,nodoFinal));
-            drawArco(g,grafo.a);                   System.out.println("a = "+grafo.a);
-            paintRuta();
+////            drawNodo(g,grafo.calcularRuta(nodoInicial,nodoFinal));
+            paintRuta(grafo.calcularRuta(nodoInicial,nodoFinal));
+            drawArco(g,grafo.ai);
         }
         g.dispose();
         mapa.repaint();
     }
 
-    private void paintRuta() {
-        
+    private void paintRuta(ArrayList ruta) {
+        Graphics2D g = this.mapa.getGraphics2D();
+        g.setColor(Color.blue);
+        g.setStroke(new BasicStroke(5));
+        for (Object obj : ruta){ 
+            if(obj instanceof Nodo){
+                drawNodo(g,(Nodo)obj);
+            }else{
+                drawArco(g,(Arco)obj);
+            }
+            
+            
+        }
+        g.dispose();
+        mapa.repaint();
     }
     
     public void restablecer(){
