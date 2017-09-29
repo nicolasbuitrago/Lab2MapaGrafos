@@ -145,7 +145,7 @@ public class Grafo {
         Nodo nodoi = puntoP(ai,factorU(ni,ai)),
                 nodof = puntoP(af,factorU(nf,af));
         ArrayList ruta = new ArrayList();
-        this.dijkstra(nodos.get(1), nodos.get(47));
+        this.dijkstra(nodos.get(1), nodos.get(19));System.out.println(ai+"   "+af);
         ruta.add(nodoi);
         ruta.add(ai);
         ruta.add(af);
@@ -243,7 +243,7 @@ public class Grafo {
             visto[nodos.indexOf(nod)] = true;
             for (int j = 0; j < nodos.size(); j++) {
                 if(adyacencia[u][j] == 1 && !visto[j] &&distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
-                    if(true) distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
+                    distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
                     padre[j]=nodos.get(j); 
                     cola.add(nodos.get(j));
                 }
@@ -251,7 +251,7 @@ public class Grafo {
         }
         for (int i = 0; i < nodos.size(); i++) {
             System.out.print(nodos.indexOf(padre[i])+" ");
-        }
+        }System.out.println("\n\n\ndistancia = "+distancia[nodos.indexOf(nf)]);
         return ruta;
     }
     
