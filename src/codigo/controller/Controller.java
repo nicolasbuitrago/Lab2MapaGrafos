@@ -107,9 +107,8 @@ public class Controller {
         this.mapa.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println(grafo.getCantNodos());
-                graphics.crearGrafoMapa(e.getX(),e.getY());    //Metodo para crear un grafo a partir de los clicks en el panel
-//                graphics.getPoints(e.getX(),e.getY());
+//                graphics.crearGrafoMapa(e.getX(),e.getY());    //Metodo para crear un grafo a partir de los clicks en el panel
+                graphics.getPoints(e.getX(),e.getY());  //             System.out.println("x = "+e.getX()+", "+e.getY());
             }
 
             @Override

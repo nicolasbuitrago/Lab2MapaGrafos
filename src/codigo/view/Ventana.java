@@ -22,10 +22,6 @@ public class Ventana extends javax.swing.JFrame {
         jpMapa.add(control.getMapa());
         jpMapa.repaint();
         
-////        Graphics g = jpMapa.getGraphics();
-////        g.setColor(Color.red);
-////        g.drawRect(10, 50, 100,100);
-        
         lblHoraActual.setText(control.horaActual());
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -220,13 +216,13 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 //        control.paintMapa(100, 50);
-        control.nodo();
+////        control.nodo();
         control.restablecer();
 ////        jpMapa.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        control.setGrafo();
+//        control.setGrafo();
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
