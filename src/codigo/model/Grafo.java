@@ -242,9 +242,9 @@ public class Grafo {
             int u = nodos.indexOf(nod);
             visto[nodos.indexOf(nod)] = true;
             for (int j = 0; j < nodos.size(); j++) {
-                if(adyacencia[nodos.indexOf(nod)][j] == 1 && !visto[u] && distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
-                    distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
-                    padre[j]=nodos.get(j);
+                if(adyacencia[u][j] == 1 && !visto[j] &&distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
+                    if(true) distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
+                    padre[j]=nodos.get(j); 
                     cola.add(nodos.get(j));
                 }
             }
@@ -289,7 +289,7 @@ public class Grafo {
                 if(adyacencia[nodos.indexOf(nodo)][j] == 1){
                     if(distancia(nodo,nodos.get(j))<min){
                         min = distancia(nodo,nodos.get(j));
-                        nod = nodos.get(j);
+                        nod = nodo;
                     }
                 }
             }
