@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Estudiante
  */
 public class Grafo {
-    ArrayList<Nodo> nodos;    Nodo p;   public Arco a;
+    ArrayList<Nodo> nodos;   public Arco a;     // Nodo p;
     ArrayList<Arco> arcos;
     int cantNodos = 0;
     public int TAM_NODOS = 20;
@@ -128,8 +128,8 @@ public class Grafo {
     public Nodo calcularRuta(Nodo ni, Nodo nf){
         Arco a = arcoMasCercano(ni);
         this.a = a;
-//        Nodo nodo = puntoP(a,factorU(ni,a));
-        Nodo nodo = p;
+        Nodo nodo = puntoP(a,factorU(ni,a));System.out.println("nodo = "+nodo);
+////        Nodo nodop = p;
         return nodo;
     }
     
@@ -138,7 +138,7 @@ public class Grafo {
         int min = Integer.MAX_VALUE, d;
         for (Arco arco : arcos) {
             d = this.distanciaRectaPunto(ni, arco);
-            if(Math.abs(d)<min){
+            if(d<min){
                 min = d;
                 a= arco;
             }
@@ -172,11 +172,11 @@ public class Grafo {
         if (u >= 0 && u <= 1) {
             x = a.getX()+u*(b.getX()-a.getX());
             y = a.getY()+u*(b.getY()-a.getY());
-            p = new Nodo((int)x,(int)y); System.out.println("pd = "+p); this.p = p;
+//            p = new Nodo((int)x,(int)y); System.out.println("pd = "+p); this.p = p;
             y = Math.pow(b.getX()-a.getX(),2)+Math.pow(b.getY()-a.getY(),2);
             d = ((b.getX()-a.getX())*(c.getY()-a.getY())-(b.getY()-a.getY())*(c.getX()-a.getX()))/Math.sqrt(y);
         }
-        return (int)d;
+        return (int)Math.abs(d);
     }
     
      private void calcularMatriz(){

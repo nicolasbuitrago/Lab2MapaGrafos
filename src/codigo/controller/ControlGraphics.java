@@ -124,13 +124,12 @@ public class ControlGraphics {
         }
         if(!ruta&&nodoFinal!=null){
             ruta = true;
-            g.setColor(Color.red);
+            g.setColor(Color.blue);
             g.setStroke(new BasicStroke(5));
             drawNodo(g,grafo.calcularRuta(nodoInicial,nodoFinal));
-            drawArco(g,grafo.a);System.out.println("a = "+grafo.a);
+            drawArco(g,grafo.a);                   System.out.println("a = "+grafo.a);
             paintRuta();
         }
-        
         g.dispose();
         mapa.repaint();
     }
