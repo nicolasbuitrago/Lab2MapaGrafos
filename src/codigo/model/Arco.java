@@ -77,6 +77,7 @@ public class Arco {
 
     @Override
     public String toString() {
+//        return  + "," + y1 + "," + x2 + "," + y2 + "," + dist;
         return x1 + "," + y1 + "," + x2 + "," + y2 + "," + dist;
     }
 

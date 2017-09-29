@@ -145,7 +145,7 @@ public class Grafo {
         Nodo nodoi = puntoP(ai,factorU(ni,ai)),
                 nodof = puntoP(af,factorU(nf,af));
         ArrayList ruta = new ArrayList();
-        this.dijkstra(nodos.get(1), nodos.get(19));System.out.println(ai+"   "+af);
+        imprimirRuta(this.dijkstra(nodos.get(1), nodos.get(3)));     System.out.println(printArco(ai)+" - "+printArco(af));
         ruta.add(nodoi);
         ruta.add(ai);
         ruta.add(af);
@@ -227,7 +227,9 @@ public class Grafo {
     private Nodo[] padre = new Nodo[100];
     private boolean[] visto = new boolean[100];
     private ArrayList dijkstra(Nodo ni,Nodo nf){
-        ArrayList ruta = new ArrayList();adyacencia();System.out.println("\n\n\n\n");
+        ArrayList ruta = new ArrayList();
+        adyacencia();//System.out.println("\n\n\n\n");
+        int f = nodos.indexOf(nf);
         for (Nodo nodo : nodos) {
             int i = nodos.indexOf(nodo);
             distancia[i] = Integer.MAX_VALUE;
@@ -244,6 +246,7 @@ public class Grafo {
             for (int j = 0; j < nodos.size(); j++) {
                 if(adyacencia[u][j] == 1 && !visto[j] &&distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
                     distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
+                    if(f==j) ruta.add(nod);
                     padre[j]=nodos.get(j); 
                     cola.add(nodos.get(j));
                 }
@@ -274,12 +277,12 @@ public class Grafo {
                 }
             }
         } 
-        for (int i = 0; i < nodos.size(); i++) {
-            for (int j = 0; j < nodos.size(); j++) {
-                System.out.print(adyacencia[i][j]+" ");
-            }
-            System.out.println("");
-        }
+//        for (int i = 0; i < nodos.size(); i++) {
+//            for (int j = 0; j < nodos.size(); j++) {
+//                System.out.print(adyacencia[i][j]+" ");
+//            }
+//            System.out.println("");
+//        }
     }
    
     private Nodo extraerMinimo(ArrayList<Nodo> n){
@@ -296,6 +299,13 @@ public class Grafo {
         }
         n.remove(nod);
         return nod;
+    }
+    
+    private void imprimirRuta(ArrayList ruta){
+        for (Object object : ruta) {
+            System.out.print(nodos.indexOf((Nodo)object)+"   ");
+        }
+        System.out.println("\n");
     }
     
     /*
@@ -520,5 +530,9 @@ public class Grafo {
          }
          return false;
     }
+     
+     public String printArco(Arco arco){
+         return nodos.indexOf(arco.getNodoInicial())+","+nodos.indexOf(arco.getNodoFinal())+","+arco.getDist();
+     }
 }
 
