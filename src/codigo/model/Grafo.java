@@ -145,7 +145,7 @@ public class Grafo {
         Nodo nodoi = puntoP(ai,factorU(ni,ai)),
                 nodof = puntoP(af,factorU(nf,af));
         ArrayList ruta = new ArrayList();
-        imprimirRuta(this.dijkstra(nodos.get(1), nodos.get(3)));     System.out.println(printArco(ai)+" - "+printArco(af));
+        imprimirRuta(this.dijkstra(nodos.get(1), nodos.get(4)));     System.out.println(printArco(ai)+" - "+printArco(af));
         ruta.add(nodoi);
         ruta.add(ai);
         ruta.add(af);
@@ -223,10 +223,13 @@ public class Grafo {
     
     */
     private int[][] adyacencia;
-    private int[] distancia = new int[100];
-    private Nodo[] padre = new Nodo[100];
-    private boolean[] visto = new boolean[100];
+//    private 
+//    private 
+//    private 
     private ArrayList dijkstra(Nodo ni,Nodo nf){
+        int[] distancia = new int[nodos.size()];
+        Nodo[] padre = new Nodo[nodos.size()];
+        boolean[] visto = new boolean[nodos.size()];
         ArrayList ruta = new ArrayList();
         adyacencia();//System.out.println("\n\n\n\n");
         int f = nodos.indexOf(nf);
@@ -246,12 +249,12 @@ public class Grafo {
             for (int j = 0; j < nodos.size(); j++) {
                 if(adyacencia[u][j] == 1 && !visto[j] &&distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
                     distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
-                    if(f==j) ruta.add(nod);
+//                    ruta.add(nod);
                     padre[j]=nodos.get(j); 
                     cola.add(nodos.get(j));
                 }
             }
-        }
+        }System.out.println("padre = "+nodos.indexOf(padre[f]));
         for (int i = 0; i < nodos.size(); i++) {
             System.out.print(nodos.indexOf(padre[i])+" ");
         }System.out.println("\n\n\ndistancia = "+distancia[nodos.indexOf(nf)]);
