@@ -122,7 +122,7 @@ public class ControlGraphics {
             nodoFinal = new Nodo(x- TAM_NODOS / 2,y- TAM_NODOS / 2);
             drawNodo(g,nodoFinal,"L");
         }
-        else if(!ruta&&nodoFinal!=null){
+        if(!ruta&&nodoFinal!=null){
             ruta = true;
             g.setColor(Color.blue);
             g.setStroke(new BasicStroke(5));

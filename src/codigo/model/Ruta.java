@@ -6,6 +6,7 @@
 package codigo.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -13,23 +14,100 @@ import java.util.Objects;
  * @author nicolasbuitrago
  */
 public class Ruta implements Comparable{
-    private ArrayList ruta;
+    private ArrayList<Nodo> ruta;
     private int distancia;
 
     public Ruta() {
-        ruta = new ArrayList();
+        this.ruta = new ArrayList();
+        this.distancia = 0;
     }
     
-    public void add(Object o){
-        ruta.add(o);
-        if(o instanceof Arco){
-            this.distancia += ((Arco)o).getDist();
-        }
+//    private Ruta(Ruta ruta) {
+//        this.ruta = new ArrayList();
+//        this.ruta.addAll(ruta.ruta);
+//        this.distancia = ruta.distancia;
+//    }
+    
+    private Ruta(List sub) {
+        this.ruta = new ArrayList();
+        this.ruta.addAll(sub);
+        this.distancia = 0;
+    }
+    
+    private Ruta(int dist){
+        ruta = new ArrayList();
+        this.distancia = dist;
+    }
+    
+    public void add(Nodo nodo){
+        ruta.add(nodo);
+//        if(o instanceof Arco){
+//            this.distancia += ((Arco)o).getDist();
+//        }
+    }
+    
+//    public static void add(ArrayList<Ruta> rutas,Object o){
+//        for (Ruta ruta : rutas) {
+//            if (ruta.getLast().equals(o)) {
+//                ruta.add(o);
+//                if (o instanceof Arco) {
+//                   ruta.distancia += ((Arco) o).getDist();
+//                }
+//            }
+//        }
+//    }
+    
+    public Object getLast(){
+        return this.ruta.get(ruta.size()-1);
     }
     
     public int getDistancia(){
         return this.distancia;
     }
+    
+    public void addDistancia(int dist){
+        this.distancia += dist;
+    }
+
+    public ArrayList getRuta() {
+        return ruta;
+    }
+    
+    public static Ruta rutaMasCorta(ArrayList<Ruta> rutas, Nodo nf){
+        Ruta min = new Ruta(Integer.MAX_VALUE);
+        for (Ruta ruta : rutas) {
+            if(min.compareTo(ruta)>0 && ruta.ruta.get(ruta.ruta.size()-1).equals(nf)){
+                min = ruta;
+            }else if(min.compareTo(ruta)==0) System.out.println("SON IGUALES LAS RUTAS =0");
+        }
+        return min;
+    }
+    
+    public boolean contains(Nodo nodo){
+        return ruta.contains(nodo);
+    }
+    
+    public int indexOf(Nodo nodo){
+        return ruta.indexOf(nodo);
+    }
+    
+    public Nodo get(int index){
+        return (Nodo) ruta.get(index);
+    }
+    
+    public Ruta subRuta(Nodo nodo){
+        Ruta ruta;
+        List a = this.ruta.subList(0,this.ruta.indexOf(nodo)+1);
+        ruta = new Ruta(a);
+        return ruta;
+    }
+    
+//    public void imprimirRuta(){
+//        for (Object object : this.ruta) {
+//            System.out.print(nodos.indexOf((Nodo)object)+"   ");
+//        }
+//        System.out.println("\n");
+//    }
 
     @Override
     public int compareTo(Object o) {

@@ -145,7 +145,7 @@ public class Grafo {
         Nodo nodoi = puntoP(ai,factorU(ni,ai)),
                 nodof = puntoP(af,factorU(nf,af));
         ArrayList ruta = new ArrayList();
-        imprimirRuta(this.dijkstra(nodos.get(1), nodos.get(4)));     System.out.println(printArco(ai)+" - "+printArco(af));
+        imprimirRuta(this.dijkstra(nodos.get(60), nodos.get(8)));     System.out.println(printArco(ai)+" - "+printArco(af));
         ruta.add(nodoi);
         ruta.add(ai);
         ruta.add(af);
@@ -226,11 +226,11 @@ public class Grafo {
 //    private 
 //    private 
 //    private 
-    private ArrayList dijkstra(Nodo ni,Nodo nf){
+    private Ruta dijkstra(Nodo ni,Nodo nf){
         int[] distancia = new int[nodos.size()];
         Nodo[] padre = new Nodo[nodos.size()];
         boolean[] visto = new boolean[nodos.size()];
-        ArrayList ruta = new ArrayList();
+        ArrayList<Ruta> rutas = new ArrayList();
         adyacencia();//System.out.println("\n\n\n\n");
         int f = nodos.indexOf(nf);
         for (Nodo nodo : nodos) {
@@ -241,7 +241,8 @@ public class Grafo {
         }
         distancia[nodos.indexOf(ni)] = 0;
         ArrayList<Nodo> cola =  new ArrayList();  // cola de prioridad
-        cola.add(ni);
+        Ruta ruta = new Ruta();     ruta.add(ni);
+        cola.add(ni);     rutas.add(ruta);
         while (!cola.isEmpty()) {
             Nodo nod = extraerMinimo(cola);
             int u = nodos.indexOf(nod);
@@ -249,16 +250,48 @@ public class Grafo {
             for (int j = 0; j < nodos.size(); j++) {
                 if(adyacencia[u][j] == 1 && !visto[j] &&distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
                     distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
-//                    ruta.add(nod);
+                    add(rutas,nod,nodos.get(j));
                     padre[j]=nodos.get(j); 
-                    cola.add(nodos.get(j));
+                    cola.add(nodos.get(j));   //if(j==f)return Ruta.rutaMasCorta(rutas,nf);
                 }
             }
-        }System.out.println("padre = "+nodos.indexOf(padre[f]));
-        for (int i = 0; i < nodos.size(); i++) {
-            System.out.print(nodos.indexOf(padre[i])+" ");
-        }System.out.println("\n\n\ndistancia = "+distancia[nodos.indexOf(nf)]);
-        return ruta;
+        }//System.out.println("padre = "+nodos.indexOf(padre[f]));
+//        for (int i = 0; i < nodos.size(); i++) {
+//            System.out.print(nodos.indexOf(padre[i])+" ");
+//        }
+        //System.out.println("\n\n\ndistancia = "+distancia[nodos.indexOf(nf)]);
+        return Ruta.rutaMasCorta(rutas,nf);
+    }
+    
+    public void add(ArrayList<Ruta> rutas,Nodo nod,Nodo no){
+        for (Ruta ruta : rutas) {
+            if (ruta.getLast().equals(nod)) {
+                ruta.add(no);
+                ruta.addDistancia(distancia(nod,no));
+//                if (o instanceof Arco) {
+//                   ruta.addDistancia(((Arco) o).getDist());
+//                }
+                break;
+            }
+        }
+        Ruta r = null;
+        for (Ruta ruta : rutas) {
+            if (ruta.contains(nod)) {
+                r = ruta.subRuta(nod);
+                r.addDistancia(distancia(r));
+                rutas.add(r);
+                break;
+            }
+        }
+    }
+    
+    private int distancia(Ruta ruta){
+        int distancia = 0;
+        ArrayList<Nodo> rut = ruta.getRuta();
+        for (int i = 0; i < rut.size()-1; i++) {
+            distancia += distancia(rut.get(i),rut.get(i+1));
+        }
+        return distancia;
     }
     
     public void adyacencia(){
@@ -304,8 +337,8 @@ public class Grafo {
         return nod;
     }
     
-    private void imprimirRuta(ArrayList ruta){
-        for (Object object : ruta) {
+    private void imprimirRuta(Ruta ruta){
+        for (Object object : ruta.getRuta()) {
             System.out.print(nodos.indexOf((Nodo)object)+"   ");
         }
         System.out.println("\n");
