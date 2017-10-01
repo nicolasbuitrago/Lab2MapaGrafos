@@ -82,7 +82,7 @@ public class Controller {
             while (v != null) {                
                 String[] c = v.split(",");//System.out.println("c.length = "+c.length);
                 if(c.length==2){
-                    grafo.addNodo(new Nodo(Integer.parseInt(c[0]),Integer.parseInt(c[1])));
+                    grafo.addNodo(new Nodo(grafo.getCantNodos(),Integer.parseInt(c[0]),Integer.parseInt(c[1])));
                 }else{
                     Nodo ni = grafo.buscarNodo(toInt(c[0]),toInt(c[1])), nf = grafo.buscarNodo(toInt(c[2]),toInt(c[3]));
                     grafo.addArco(new Arco(ni,nf,toInt(c[4])));

@@ -11,13 +11,21 @@ package codigo.model;
  * @author nicolasbuitrago
  */
 public class Nodo {
-    int x,y;
-//    Color color;
+    private int name,x,y;
+
+    public Nodo(int name,int x, int y) {
+        this.name = name;
+        this.x = x;
+        this.y = y;
+    }
 
     public Nodo(int x, int y) {
         this.x = x;
         this.y = y;
-//        this.color = color;
+    }
+
+    public int getName() {
+        return name;
     }
 
     public int getX() {
@@ -44,8 +52,9 @@ public class Nodo {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.x;
-        hash = 53 * hash + this.y;
+        hash = 79 * hash + this.name;
+        hash = 79 * hash + this.x;
+        hash = 79 * hash + this.y;
         return hash;
     }
 
@@ -61,6 +70,9 @@ public class Nodo {
             return false;
         }
         final Nodo other = (Nodo) obj;
+        if (this.name != other.name) {
+            return false;
+        }
         if (this.x != other.x) {
             return false;
         }
@@ -70,10 +82,6 @@ public class Nodo {
         return true;
     }
 
-    public Nodo clone(){
-        Nodo clone = new Nodo(this.x,this.y);
-        return clone;
-    }
-    
-       
+   
+          
 }
