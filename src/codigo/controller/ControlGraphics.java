@@ -125,7 +125,6 @@ public class ControlGraphics {
         }
         if(!ruta&&nodoFinal!=null){
             ruta = true;
-            g.setColor(Color.blue);
             g.setStroke(new BasicStroke(5));
 ////            drawNodo(g,grafo.calcularRuta(nodoInicial,nodoFinal));
             paintRuta(g,grafo.calcularRuta(nodoInicial,nodoFinal));
@@ -137,7 +136,7 @@ public class ControlGraphics {
     }
 
     private void paintRuta(Graphics2D g,ArrayList ruta) {
-        g.setColor(Color.blue);
+        g.setColor(Color.red);
         g.setStroke(new BasicStroke(5));
         for (Object obj : ruta){ 
             if(obj instanceof Nodo){

@@ -167,7 +167,7 @@ public class Grafo {
         ruta.addAll(getArcosRuta(r));
         
         ruta.add(new Arco(ni,r.get(0)));
-        ruta.add(new Arco(nf,r.getLast()));
+//        ruta.add(new Arco(nf,r.getLast()));
         
 //        ruta.add(af);
 //        ruta.add(nf);
@@ -208,7 +208,7 @@ public class Grafo {
             rutas.add(dijkstra(ai.getNodoInicial(), nodof));
             rutas.add(dijkstra(ai.getNodoFinal(), nodof));
         }else{
-            rutas.add(dijkstra(ni, nodof));
+            rutas.add(dijkstra(nodoi, nodof));
         }
         return Ruta.rutaMasCorta(rutas, nodof);
     }

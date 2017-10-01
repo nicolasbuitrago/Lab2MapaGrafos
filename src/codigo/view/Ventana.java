@@ -203,14 +203,14 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 //        control.paintMapa(100, 50);
-        control.nodo();
-//        control.restablecer();
+//        control.nodo();
+        control.restablecer();
 ////        jpMapa.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        control.setGrafo();
-//        System.exit(NORMAL);
+//        control.setGrafo();
+        System.exit(NORMAL);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
