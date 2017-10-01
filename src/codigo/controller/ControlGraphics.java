@@ -114,12 +114,13 @@ public class ControlGraphics {
 
     public void getPoints(int x, int y) {
         Graphics2D g = this.mapa.getGraphics2D();
+        Nodo nodo = new Nodo(x- TAM_NODOS / 2,y- TAM_NODOS / 2);
 //        g.setColor(Color.red);
         if(nodoInicial == null){
-            nodoInicial = new Nodo(x- TAM_NODOS / 2,y- TAM_NODOS / 2);
+            nodoInicial = grafo.buscarNodo(nodo)!= null ? grafo.buscarNodo(nodo) : grafo.puntoP(nodo);
             drawNodo(g,nodoInicial,"P");
         }else if(nodoFinal == null){
-            nodoFinal = new Nodo(x- TAM_NODOS / 2,y- TAM_NODOS / 2);
+            nodoFinal = grafo.buscarNodo(nodo)!= null ? grafo.buscarNodo(nodo) : grafo.puntoP(nodo);
             drawNodo(g,nodoFinal,"L");
         }
         if(!ruta&&nodoFinal!=null){
@@ -128,7 +129,8 @@ public class ControlGraphics {
             g.setStroke(new BasicStroke(5));
 ////            drawNodo(g,grafo.calcularRuta(nodoInicial,nodoFinal));
             paintRuta(g,grafo.calcularRuta(nodoInicial,nodoFinal));
-//            drawArco(g,grafo.ai);
+            drawNodo(g,nodoInicial,"P");
+            drawNodo(g,nodoFinal,"L");            
         }
         g.dispose();
         mapa.repaint();

@@ -134,6 +134,17 @@ public class Grafo {
         return nodoR;
     }
     
+    public Nodo buscarNodo(Nodo n){
+        Nodo nodoR = null;
+        for (Nodo nodo : nodos) {
+            if (n.getX()>=nodo.getX() && n.getY()>= nodo.getY() && n.getX()<=nodo.getX()+TAM_NODOS && n.getY() <=nodo.getY()+TAM_NODOS) {
+                nodoR= nodo;
+                break;
+            }
+        }
+        return nodoR;
+    }
+    
     /**
      * Funcion que se encarga de hallar la ruta mas corta del punto de partida al punto de llegada
      * @param ni Nodo inicial que es marcado en el mapa como el punto de partida
@@ -145,18 +156,17 @@ public class Grafo {
 //           ruta.add(buscarNodo(ni.getX(),ni.getY()));
 //        }
         Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);
-        Nodo nodoi = puntoP(ai,factorU(ni,ai)),
-                nodof = puntoP(af,factorU(nf,af));
+//        Nodo nodoi = puntoP(ai,factorU(ni,ai)), nodof = puntoP(af,factorU(nf,af));
         ArrayList ruta = new ArrayList();
         imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));//     System.out.println(printArco(ai)+" - "+printArco(af));
         
-        ruta.add(nodoi);
+//        ruta.add(ni);
         ruta.add(ai);
         
         ruta.addAll(getArcosRuta(eleccion(ai,nf,af)));
         
         ruta.add(af);
-        ruta.add(nodof);
+//        ruta.add(nf);
         return ruta;
     }
     
@@ -192,6 +202,10 @@ public class Grafo {
         return Ruta.rutaMasCorta(rutas, nodo);
     }
     
+    private Nodo nodoMasCercano(Nodo nodo, Arco arco){
+        return null;
+    }
+    
     /**
      * Funcion que se encarga de encontrar el Arco mas cercano al nodo que se le pasa por parametro
      * @param ni el nodo del cual se quiere encontrar el arco mas cercano
@@ -218,13 +232,25 @@ public class Grafo {
         return u;
     }
     
+    public Nodo puntoP(Nodo ni){
+        double x,y,u;
+        Arco ar = arcoMasCercano(ni);
+        Nodo p, a = ar.getNodoInicial(), b = ar.getNodoFinal();
+        u = factorU(ni, ar);
+        x = a.getX() + u * (b.getX() - a.getX());
+        y = a.getY() + u * (b.getY() - a.getY());
+        p = new Nodo((int) x, (int) y);    //System.out.println("p = "+p+"\n ar= "+ar);
+//        }
+        return p;
+    }
+    
     private Nodo puntoP(Arco ar,double u){
         double x,y;
         Nodo p = null, a = ar.getNodoInicial(), b = ar.getNodoFinal();
 //        if (u >= 0 && u <= 1) {
-            x = a.getX()+u*(b.getX()-a.getX());
-            y = a.getY()+u*(b.getY()-a.getY());
-            p = new Nodo((int)x,(int)y);    //System.out.println("p = "+p+"\n ar= "+ar);
+        x = a.getX() + u * (b.getX() - a.getX());
+        y = a.getY() + u * (b.getY() - a.getY());
+        p = new Nodo((int) x, (int) y);    //System.out.println("p = "+p+"\n ar= "+ar);
 //        }
         return p;
     }
