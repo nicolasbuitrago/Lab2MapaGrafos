@@ -76,9 +76,9 @@ public class Ruta implements Comparable{
     public static Ruta rutaMasCorta(ArrayList<Ruta> rutas, Nodo nf){
         Ruta min = new Ruta(Integer.MAX_VALUE);
         for (Ruta ruta : rutas) {
-            if(min.compareTo(ruta)>0 && ruta.ruta.get(ruta.ruta.size()-1).equals(nf)){
+            if(ruta.compareTo(min)<0 && ruta.ruta.get(ruta.ruta.size()-1).equals(nf)){
                 min = ruta;
-            }else if(min.compareTo(ruta)==0) System.out.println("SON IGUALES LAS RUTAS =0");
+            }//else if(min.compareTo(ruta)==0) System.out.println("SON IGUALES LAS RUTAS =0");
         }
         return min;
     }

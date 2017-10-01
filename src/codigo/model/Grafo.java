@@ -108,7 +108,7 @@ public class Grafo {
     }
     
     public void addNodo(Nodo nodo){
-        nodos.add(nodo);
+        nodos.add(nodo); //System.out.println(nodo+",    "+nodos.indexOf(nodo));
     }
 
     public void addArco(Arco arco){
@@ -145,7 +145,7 @@ public class Grafo {
         Nodo nodoi = puntoP(ai,factorU(ni,ai)),
                 nodof = puntoP(af,factorU(nf,af));
         ArrayList ruta = new ArrayList();
-        imprimirRuta(this.dijkstra(nodos.get(60), nodos.get(8)));     System.out.println(printArco(ai)+" - "+printArco(af));
+        imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));//     System.out.println(printArco(ai)+" - "+printArco(af));
         ruta.add(nodoi);
         ruta.add(ai);
         ruta.add(af);
@@ -264,25 +264,32 @@ public class Grafo {
     }
     
     public void add(ArrayList<Ruta> rutas,Nodo nod,Nodo no){
+//        for (Ruta ruta : rutas) {
+//            if (ruta.getLast().equals(nod)) {
+//                ruta.add(no);
+//                ruta.addDistancia(distancia(nod,no));
+////                if (o instanceof Arco) {
+////                   ruta.addDistancia(((Arco) o).getDist());
+////                }
+//                return;
+//            }
+//        }Ruta.rutaMasCorta(rutas,nf)
+        Ruta r = subRutaMasCorta(rutas,nod);
+        r.add(no);
+        r.addDistancia(distancia(nod,no));
+        rutas.add(r);
+    }
+    
+    private Ruta subRutaMasCorta(ArrayList<Ruta> rutas, Nodo nod){
+        Ruta min = new Ruta();  min.addDistancia(Integer.MAX_VALUE);
         for (Ruta ruta : rutas) {
-            if (ruta.getLast().equals(nod)) {
-                ruta.add(no);
-                ruta.addDistancia(distancia(nod,no));
-//                if (o instanceof Arco) {
-//                   ruta.addDistancia(((Arco) o).getDist());
-//                }
-                break;
+            Ruta r = ruta.subRuta(nod);
+            if (ruta.contains(nod) && min.compareTo(r)>0) {
+                min = ruta.subRuta(nod);
+                min.addDistancia(distancia(min));
             }
         }
-        Ruta r = null;
-        for (Ruta ruta : rutas) {
-            if (ruta.contains(nod)) {
-                r = ruta.subRuta(nod);
-                r.addDistancia(distancia(r));
-                rutas.add(r);
-                break;
-            }
-        }
+        return min;
     }
     
     private int distancia(Ruta ruta){
