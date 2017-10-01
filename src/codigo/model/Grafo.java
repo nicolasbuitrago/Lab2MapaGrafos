@@ -195,17 +195,22 @@ public class Grafo {
     
     private Ruta eleccion(Nodo ni,Arco ai,Nodo nf, Arco af){
         ArrayList<Ruta> rutas = new ArrayList();                   
-        Nodo nodo = buscarNodo(ni);
-        if(nodo == null){
+        Nodo nodof = buscarNodo(nf), nodoi;
+        if(nodof == null){
             if (distancia(af.getNodoInicial(), nf) <= distancia(af.getNodoFinal(), nf)) {
-                nodo = af.getNodoInicial();
+                nodof = af.getNodoInicial();
             } else {
-                nodo = af.getNodoInicial();
+                nodof = af.getNodoInicial();
             }
         }
-        rutas.add(dijkstra(ai.getNodoInicial(), nodo));
-        rutas.add(dijkstra(ai.getNodoFinal(), nodo));
-        return Ruta.rutaMasCorta(rutas, nodo);
+        nodoi = buscarNodo(ni);
+        if(nodoi == null){
+            rutas.add(dijkstra(ai.getNodoInicial(), nodof));
+            rutas.add(dijkstra(ai.getNodoFinal(), nodof));
+        }else{
+            rutas.add(dijkstra(ni, nodof));
+        }
+        return Ruta.rutaMasCorta(rutas, nodof);
     }
     
     private Nodo nodoMasCercano(Nodo nodo, Arco arco){
