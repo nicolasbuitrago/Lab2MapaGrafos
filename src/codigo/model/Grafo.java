@@ -22,7 +22,7 @@ public class Grafo {
     ArrayList<Nodo> nodos;   //public Arco ai;      Nodo p;
     ArrayList<Arco> arcos;
     int cantNodos = 0;
-    public int TAM_NODOS = 20;
+    public static final int TAM_NODOS = 20;
     int matriz[][];
 
     public Grafo() {
@@ -119,7 +119,7 @@ public class Grafo {
         return (int) Math.sqrt(Math.pow(x2-x1, 2.0)+Math.pow(y2-y1, 2.0));
     }
     
-    public int distancia(Nodo i, Nodo f){
+    public static int distancia(Nodo i, Nodo f){
         return (int) Math.sqrt(Math.pow(f.getX()-i.getX(), 2.0)+Math.pow(f.getY()-i.getY(), 2.0));
     }
     
@@ -155,17 +155,21 @@ public class Grafo {
 //        if(buscarNodo(ni.getX(),ni.getY())!=null){
 //           ruta.add(buscarNodo(ni.getX(),ni.getY()));
 //        }
-        Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);
 //        Nodo nodoi = puntoP(ai,factorU(ni,ai)), nodof = puntoP(af,factorU(nf,af));
         ArrayList ruta = new ArrayList();
         imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));//     System.out.println(printArco(ai)+" - "+printArco(af));
         
 //        ruta.add(ni);
-        ruta.add(ai);
+//        ruta.add(ai);
+        Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);
+        Ruta r = eleccion(ni,ai,nf,af);
+    
+        ruta.addAll(getArcosRuta(r));
         
-        ruta.addAll(getArcosRuta(eleccion(ai,nf,af)));
+        ruta.add(new Arco(ni,r.get(0)));
+        ruta.add(new Arco(nf,r.getLast()));
         
-        ruta.add(af);
+//        ruta.add(af);
 //        ruta.add(nf);
         return ruta;
     }
@@ -189,13 +193,15 @@ public class Grafo {
         return a;
     }
     
-    private Ruta eleccion(Arco ai,Nodo nf, Arco af){
-        ArrayList<Ruta> rutas = new ArrayList();
-        Nodo nodo;
-        if(distancia(af.getNodoInicial(),nf)<=distancia(af.getNodoFinal(),nf)){
-            nodo = af.getNodoInicial();
-        }else{
-            nodo = af.getNodoInicial();
+    private Ruta eleccion(Nodo ni,Arco ai,Nodo nf, Arco af){
+        ArrayList<Ruta> rutas = new ArrayList();                   
+        Nodo nodo = buscarNodo(ni);
+        if(nodo == null){
+            if (distancia(af.getNodoInicial(), nf) <= distancia(af.getNodoFinal(), nf)) {
+                nodo = af.getNodoInicial();
+            } else {
+                nodo = af.getNodoInicial();
+            }
         }
         rutas.add(dijkstra(ai.getNodoInicial(), nodo));
         rutas.add(dijkstra(ai.getNodoFinal(), nodo));

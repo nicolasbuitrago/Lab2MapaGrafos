@@ -52,9 +52,9 @@ public class ControlGraphics {
                 if (!nodoInicial.equals(nodoFinal)) {
                     g.setColor(Color.BLACK);
                     g.drawLine(nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.getX() + TAM_NODOS / 2, nodoFinal.getY() + TAM_NODOS / 2);
-                    int dist = grafo.distancia(nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.getX() + TAM_NODOS / 2, nodoFinal.getY() + TAM_NODOS / 2);
-                    grafo.addArco(new Arco(nodoInicial, nodoFinal, TAM_NODOS,dist));
-                    g.drawString(Integer.toString(grafo.distancia(nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.getX() + TAM_NODOS / 2, nodoFinal.getY() + TAM_NODOS / 2)), nodoInicial.getX() + dist / 2, nodoInicial.getY() + 5);
+//                    int dist = grafo.distancia(nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.getX() + TAM_NODOS / 2, nodoFinal.getY() + TAM_NODOS / 2);
+                    grafo.addArco(new Arco(nodoInicial, nodoFinal));
+//                    g.drawString(Integer.toString(grafo.distancia(nodoInicial.getX() + TAM_NODOS / 2, nodoInicial.getY() + TAM_NODOS / 2, nodoFinal.getX() + TAM_NODOS / 2, nodoFinal.getY() + TAM_NODOS / 2)), nodoInicial.getX() + dist / 2, nodoInicial.getY() + 5);
                 } else {
                     seleccionarNodo(nodoInicial, g, Color.BLACK);
                 }

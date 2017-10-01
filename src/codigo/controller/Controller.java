@@ -85,7 +85,7 @@ public class Controller {
                     grafo.addNodo(new Nodo(Integer.parseInt(c[0]),Integer.parseInt(c[1])));
                 }else{
                     Nodo ni = grafo.buscarNodo(toInt(c[0]),toInt(c[1])), nf = grafo.buscarNodo(toInt(c[2]),toInt(c[3]));
-                    grafo.addArco(new Arco(ni,nf,grafo.TAM_NODOS,toInt(c[4])));
+                    grafo.addArco(new Arco(ni,nf,toInt(c[4])));
                 }
                 v = gra.readLine();
             }

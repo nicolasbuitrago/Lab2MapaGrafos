@@ -57,7 +57,7 @@ public class Ruta implements Comparable{
 //        }
 //    }
     
-    public Object getLast(){
+    public Nodo getLast(){
         return this.ruta.get(ruta.size()-1);
     }
     
