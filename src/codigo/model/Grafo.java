@@ -141,16 +141,55 @@ public class Grafo {
      * @return un ArrayList que almacena la ruta mas corta
      */
     public ArrayList calcularRuta(Nodo ni, Nodo nf){
+//        if(buscarNodo(ni.getX(),ni.getY())!=null){
+//           ruta.add(buscarNodo(ni.getX(),ni.getY()));
+//        }
         Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);
         Nodo nodoi = puntoP(ai,factorU(ni,ai)),
                 nodof = puntoP(af,factorU(nf,af));
         ArrayList ruta = new ArrayList();
         imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));//     System.out.println(printArco(ai)+" - "+printArco(af));
+        
         ruta.add(nodoi);
         ruta.add(ai);
+        
+        ruta.addAll(getArcosRuta(eleccion(ai,nf,af)));
+        
         ruta.add(af);
         ruta.add(nodof);
         return ruta;
+    }
+    
+    private ArrayList<Arco> getArcosRuta(Ruta ruta){
+        ArrayList<Arco> camino = new ArrayList();
+        for (int i = 0; i < ruta.getRuta().size()-1; i++) {
+            camino.add(getArco(ruta.get(i),ruta.get(i+1)));
+        }
+        return camino;
+    }
+    
+    private Arco getArco(Nodo n1, Nodo n2){
+        Arco a = null;
+        for (Arco arco : arcos) {
+            if (arco.nodoInicial.equals(n1) && arco.nodoFinal.equals(n2) || arco.nodoInicial.equals(n2) && arco.nodoFinal.equals(n1)) {
+                a = arco;
+                break;
+            }
+        }
+        return a;
+    }
+    
+    private Ruta eleccion(Arco ai,Nodo nf, Arco af){
+        ArrayList<Ruta> rutas = new ArrayList();
+        Nodo nodo;
+        if(distancia(af.getNodoInicial(),nf)<=distancia(af.getNodoFinal(),nf)){
+            nodo = af.getNodoInicial();
+        }else{
+            nodo = af.getNodoInicial();
+        }
+        rutas.add(dijkstra(ai.getNodoInicial(), nodo));
+        rutas.add(dijkstra(ai.getNodoFinal(), nodo));
+        return Ruta.rutaMasCorta(rutas, nodo);
     }
     
     /**

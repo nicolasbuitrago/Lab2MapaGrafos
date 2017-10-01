@@ -69,7 +69,7 @@ public class Ruta implements Comparable{
         this.distancia += dist;
     }
 
-    public ArrayList getRuta() {
+    public ArrayList<Nodo> getRuta() {
         return ruta;
     }
     
@@ -92,7 +92,7 @@ public class Ruta implements Comparable{
     }
     
     public Nodo get(int index){
-        return (Nodo) ruta.get(index);
+        return ruta.get(index);
     }
     
     public Ruta subRuta(Nodo nodo){
