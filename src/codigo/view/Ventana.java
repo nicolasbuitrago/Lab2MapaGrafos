@@ -21,8 +21,9 @@ public class Ventana extends javax.swing.JFrame {
         control.setMapa(new Mapa(jpMapa));
         jpMapa.add(control.getMapa());
         jpMapa.repaint();
-        
-        lblHoraActual.setText(control.horaActual());
+        lblHoraLlegada.setVisible(false);
+        control.setHoras(lblHoraActual,lblHoraLlegada);
+//        lblHoraActual.setText(control.horaActual());
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);

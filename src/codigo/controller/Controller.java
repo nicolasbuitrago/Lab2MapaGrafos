@@ -9,6 +9,7 @@ import codigo.model.Arco;
 import codigo.model.Grafo;
 import codigo.model.Mapa;
 import codigo.model.Nodo;
+import codigo.model.Tiempo;
 import codigo.view.Ventana;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -17,8 +18,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import javax.swing.JLabel;
 
 /**
  *
@@ -26,7 +26,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Controller {
     
-    private LocalTime horaActual, horaLlegada;
+    private Tiempo horaActual, horaLlegada;
     private Grafo grafo;
     private Ventana ventana;
     private Mapa mapa;
@@ -49,26 +49,19 @@ public class Controller {
         this.mapa = mapa;
         listener();
     }
-    
-    public String horaActual(){
-        horaActual = LocalTime.now();
-        String hora = fromHoraMilitar(horaActual.format(DateTimeFormatter.ofPattern("HH:mm")));
-        return hora;
-    }
-    
-    public String fromHoraMilitar(String hora){
-        String[] time = hora.split(":");
-        int h = Integer.parseInt(time[0]);
-        String m = " a.m.";
-        if(h>12){
-            h-=12;
-            m = " p.m.";
-        }
-        return Integer.toString(h)+":"+time[1]+m;
-    }
 
     private int toInt(String s){
         return Integer.parseInt(s);
+    }
+    
+    public void setHoras(JLabel horaActual, JLabel horaLlegada){
+        this.horaActual = new Tiempo(horaActual);
+        this.horaActual.start();
+        this.horaLlegada = new Tiempo(horaLlegada);
+    }
+    
+    public void setHoraLlegada(int segundos){
+        horaLlegada.start(segundos);
     }
     
     private void getGrafo(){
