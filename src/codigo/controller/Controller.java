@@ -37,7 +37,7 @@ public class Controller {
         getGrafo(); //Obtiene el grafo del archivo Grafo.txt
         this.ventana = new Ventana(this);
         this.graphics = new ControlGraphics(this.grafo,this.mapa);
-        this.graphics.paintMapa(); //Dibuja el grafo sobre el mapa
+        this.graphics.paintGrafo(); //Dibuja el grafo sobre el mapa
 //        grafo.adyacencia();
     }
 
@@ -54,16 +54,29 @@ public class Controller {
         return Integer.parseInt(s);
     }
     
+    /**
+     * Metodo que se encarga de crear las instancias de horaActual y horaLlegada y darles sus respectivos labels
+     * @param horaActual
+     * @param horaLlegada 
+     */
     public void setHoras(JLabel horaActual, JLabel horaLlegada){
         this.horaActual = new Tiempo(horaActual);
         this.horaActual.start();
         this.horaLlegada = new Tiempo(horaLlegada);
     }
     
+    /**
+     * Metodo que se encaraga de darle la hora de llegada al label en ventana y establecerle su hora
+     * @param minutos 
+     */
     public void setHoraLlegada(double minutos){
         horaLlegada.start(minutos);
     }
     
+    /**
+     * Metodo de obtener el mapa de Grafo.txt y guardarlo en los diferentes ArrayList que se encuntran en la clase Grafo
+     * para asi armar el grafo en si
+     */
     private void getGrafo(){
         FileReader frg =null;
         try {
@@ -95,20 +108,28 @@ public class Controller {
         }
     }
     
+    /**
+     * Funcion que se encarga de obtener los minutos que se le deben sumar a la hora actual para obtener la hora de llegada
+     * @param distancia es la distancia recorrida en la ruat seleccionada por el usuario
+     * @return los minutos que se demora en recorrer la ruta escogida
+     */
     private double getTiempo(int distancia){//5km/h   5000m/h    83.33m/min
-        System.out.println("Tiempo = "+distancia/84);
-        return distancia/84;
+        System.out.println("Tiempo = "+distancia/83.33);
+        return distancia/83.33;
     }
             
     public void nodo(){graphics.isNodo=!graphics.isNodo;};   //VER  QUE LA CANTIDAD DE NODOS COINCIDA CON EL NAME DEL ULTIMO NODO
     
+    /**
+     * Funcion que se encaga de añadir el MouseListener al panel que contiene el mapa
+     */
     private void listener(){
         this.mapa.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
 //                graphics.crearGrafoMapa(e.getX(),e.getY());    //Metodo para crear un grafo a partir de los clicks en el panel
                 if(graphics.getPoints(e.getX(),e.getY())){//   System.out.println(grafo.buscarNodo(e.getX(),e.getY()));
-                    int dist =grafo.getMinDistancia();System.out.println("distancia = "+dist);
+                    int dist =grafo.getMinDistancia();System.out.println("Distancia = "+dist);
                     ventana.setDistancia(Integer.toString(dist));
                     setHoraLlegada(getTiempo(dist));
                     ventana.visible();
@@ -136,7 +157,10 @@ public class Controller {
             }
         });
     }
-
+    
+    /**
+     * Funcion que se encarga de guardar el grafo en el txt llamado Grafo.txt
+     */
     public void setGrafo() {
         FileWriter fw = null;
         try {
@@ -168,6 +192,9 @@ public class Controller {
         }
     }
     
+    /**
+     * Es la funcion llamada por ventana que se encarga de reestablecer los valores de la ventana como la imagen del mapa entre otros
+     */
     public void restablecer(){
         this.graphics.restablecer();
 //        this.graphics.paintMapa(); //Pinta el grafo sobre el mapa

@@ -18,6 +18,7 @@ public class Grafo {
 //  private int cantNodos = 0;
     public static final int TAM_NODOS = 20;
     private int matriz[][];
+    private int[][] adyacencia;
     private int minDistancia;
 
     public Grafo() {
@@ -122,6 +123,12 @@ public class Grafo {
         return (int) Math.sqrt(Math.pow(f.getX()-i.getX(), 2.0)+Math.pow(f.getY()-i.getY(), 2.0));
     }
     
+    /**
+     * Metodo que se necraga de encontra el nodo que se le ha pasado como parametro en el ArrayList de nodos
+     * @param x el valor de la coordenada en x que se va buscar en el ArrayList
+     * @param y el valor de la coordenada en y que se va buscar en el ArrayList
+     * @return el nodo que coincide con las caracteristias del nodo pasado por parametro y que esta almacenado en el ArrayList nodos
+     */
     public Nodo buscarNodo(int x, int y){
         Nodo nodoR = null;
         for (Nodo nodo : nodos) {
@@ -133,6 +140,11 @@ public class Grafo {
         return nodoR;
     }
     
+    /**
+     * Metodo que se necraga de encontra el nodo que se le ha pasado como parametro en el ArrayList de nodos
+     * @param n el nodo que se va a buscar
+     * @return el nodo que coincide con las caracteristias del nodo pasado por parametro y que esta almacenado en el ArrayList nodos
+     */
     public Nodo buscarNodo(Nodo n){
         Nodo nodoR = null;
         for (Nodo nodo : nodos) {
@@ -150,20 +162,19 @@ public class Grafo {
      * @param nf Nodo final que es marcado en el mapa como punto de llegada
      * @return un ArrayList que almacena la ruta mas corta
      */
-    public ArrayList calcularRuta(Nodo ni, Nodo nf){
+    public ArrayList<Arco> calcularRuta(Nodo ni, Nodo nf){
 //        if(buscarNodo(ni.getX(),ni.getY())!=null){
 //           ruta.add(buscarNodo(ni.getX(),ni.getY()));
 //        }
 //        Nodo nodoi = puntoP(ai,factorU(ni,ai)), nodof = puntoP(af,factorU(nf,af));
-        ArrayList ruta = new ArrayList();
+//        ArrayList<Arco> ruta = new ArrayList();
         imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));     
         
-//        ruta.add(ni);
-//        ruta.add(ai);
+
         Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);   System.out.println(ai+" - "+printArco(af));
         Ruta r = eleccion(ni,ai,nf,af);
         minDistancia = r.getDistancia();
-        ruta.addAll(getArcosRuta(r));
+        ArrayList<Arco> ruta = getArcosRuta(r);
         
         Arco a = new Arco(ni,r.get(0));
         ruta.add(a);
@@ -177,6 +188,11 @@ public class Grafo {
         return ruta;
     }
     
+    /**
+     * Metodo que obtiene todos los arcos que estan entre los vertices del ArrayList ruta del objeto Ruta pasado por parametro
+     * @param ruta la ruta solucion de la cual se quieren conocer sus aros
+     * @return devulve un ArrayList<Arco> co todos los arcos que constituyen la ruta
+     */
     private ArrayList<Arco> getArcosRuta(Ruta ruta){
         ArrayList<Arco> camino = new ArrayList();
         for (int i = 0; i < ruta.getRuta().size()-1; i++) {
@@ -185,6 +201,12 @@ public class Grafo {
         return camino;
     }
     
+    /**
+     * Metodo que se encraga de obtener el arco que conecta los dos nodos que son pasados como parametros
+     * @param n1 nodo 1
+     * @param n2 nodo 2
+     * @return el arco que une n1 y a n2
+     */
     private Arco getArco(Nodo n1, Nodo n2){
         Arco a = null;
         for (Arco arco : arcos) {
@@ -196,6 +218,14 @@ public class Grafo {
         return a;
     }
     
+    /**
+     * Metodo que se encarga de tomar la eleccion de cual es el mejor nodo para empezar el recorrido y donde debe terminar
+     * @param ni nodo donde se inicia el recorrido
+     * @param ai el arco deonde se encuentra el nodo donde inicia el recorrido
+     * @param nf el nodo donde finalizael recorrido
+     * @param af el arco donde se encuentra el nodo donde finaliza el recorrido
+     * @return la ruta mas corta
+     */
     private Ruta eleccion(Nodo ni,Arco ai,Nodo nf, Arco af){
         ArrayList<Ruta> rutas = new ArrayList();                   
         Nodo nodof = buscarNodo(nf), nodoi;
@@ -301,10 +331,7 @@ public class Grafo {
                    adicionar(cola,(v, distancia[v]))
     
     */
-    private int[][] adyacencia;
-//    private 
-//    private 
-//    private 
+    
     private Ruta dijkstra(Nodo ni,Nodo nf){
         int[] distancia = new int[nodos.size()];
         Nodo[] padre = new Nodo[nodos.size()];
@@ -330,7 +357,6 @@ public class Grafo {
                 if(adyacencia[u][j] == 1 && !visto[j] &&distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
                     distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
                     add(rutas,nod,nodos.get(j));
-                    padre[j]=nodos.get(j); 
                     cola.add(nodos.get(j));   //if(j==f)return Ruta.rutaMasCorta(rutas,nf);
                 }
             }

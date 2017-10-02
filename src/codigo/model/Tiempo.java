@@ -39,12 +39,14 @@ public class Tiempo extends Thread{
     
     public void start(double minutos){
         this.time = LocalTime.now();
-        this.time.plusMinutes((long)minutos);
-        this.label.setVisible(true);
+        this.time.plusMinutes((long)Math.ceil(minutos));System.out.println("Tiempo = "+Math.ceil(minutos));
+        
         if(!isAlive()){
             this.start();
+            this.label.setVisible(true);
         }else{
             this.stop();
+            this.label.setVisible(false);
         }
         
     }

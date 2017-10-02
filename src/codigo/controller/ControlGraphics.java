@@ -31,6 +31,11 @@ public class ControlGraphics {
         this.mapa = mapa;
     }
     
+    /**
+     * Metodo usado para crear el Grafo sbre el mapa
+     * @param x valor de la coordenada en x
+     * @param y valor de la coordenada en y
+     */
     public void crearGrafoMapa(int x, int y) {
         Graphics2D g = this.mapa.getGraphics2D();
         g.setStroke(new BasicStroke(2));
@@ -80,6 +85,12 @@ public class ControlGraphics {
         g.fillOval(nodo.getX(), nodo.getY(), TAM_NODOS, TAM_NODOS);
     }
     
+    /**
+     * Se encarga de dibujar un nodo rojo en g con un String de color blanco en el cento
+     * @param g es donde se va dibujar el nodo
+     * @param nodo es el nodo que se va a dibujar
+     * @param s es el String  que se va a dibujar en el centro del nodo
+     */
     private void drawNodo(Graphics2D g,Nodo nodo, String s){
         g.setColor(Color.red);
         g.fillOval(nodo.getX(), nodo.getY(), TAM_NODOS, TAM_NODOS);
@@ -88,13 +99,19 @@ public class ControlGraphics {
 //        g.drawString(s, nodo.getX(), nodo.getY());
     }
     
+    /**
+     * Metodo que se encarga de dibujar un arco sobre g
+     * @param g es el Graphics2D sobre donde se dibujara el marco
+     * @param arco es el arco que se va a dibujar
+     */
     private void drawArco(Graphics2D g,Arco arco){
         g.drawLine(arco.getX1(), arco.getY1(), arco.getX2(), arco.getY2());
     }
     
-    public void paintMapa() {
-        
-        // creamos una instancia graphics desde la imagen para pintar sobre ella
+    /**
+     * Funcion que se encarga de pintar el grafo sobre el mapa
+     */
+    public void paintGrafo() {
         Graphics2D g = mapa.getGraphics2D();
         g.setColor(Color.BLACK);
         g.setStroke(new BasicStroke(5));
@@ -113,6 +130,12 @@ public class ControlGraphics {
 //        panel.repaint();
     }
 
+    /**
+     * Metodo que se encarga de obtener el nodoInicial y nodoFinal de los cuales a partir de ellos se empezara a calcular la ruta solucion
+     * @param x valor de la coordenda en x
+     * @param y valor de la coordenada en y
+     * @return un bool que dice si ya los dos puntos fueron seleccionados y la ruta fue calculada
+     */
     public boolean getPoints(int x, int y) {
         Graphics2D g = this.mapa.getGraphics2D();
         Nodo nodo = new Nodo(x- TAM_NODOS / 2,y- TAM_NODOS / 2);
@@ -137,18 +160,27 @@ public class ControlGraphics {
         return ruta;
     }
 
-    private void paintRuta(Graphics2D g,ArrayList ruta) {
+    /**
+     * Metodo que se encarga de pintar una ruta obtenida a partir del ArrayList ruta sobre g
+     * @param g objeto de la clase Graphics2D que es usado para poder dibujar sobre la imagen en el panel Mapa
+     * @param ruta es el ArrayList que contiene todos los arcos que conforman la ruta solucion exceptuando el primer y ultimo arco del recorrido
+     */
+    private void paintRuta(Graphics2D g,ArrayList<Arco> ruta) {
         g.setColor(Color.red);
         g.setStroke(new BasicStroke(5));
-        for (Object obj : ruta){ 
-            if(obj instanceof Nodo){
-                drawNodo(g,(Nodo)obj);
-            }else{
-                drawArco(g,(Arco)obj);
-            }
+        for (Arco arco : ruta){ 
+//            if(arco instanceof Nodo){
+//                drawNodo(g,(Nodo)arco);
+//            }else{
+                drawArco(g,(Arco)arco);
+//            }
         }
     }
     
+    /**
+     * Metodo que se encarga de reestablecer los graficos mostrados en la ventana. Como volver a cargar la imagen
+     * deseleccionar el nodoInicial y nodoFinal, etc...
+     */
     public void restablecer(){
         nodoInicial = null;
         nodoFinal = null;
