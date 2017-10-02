@@ -33,6 +33,7 @@ public class ControlGraphics {
     
     public void crearGrafoMapa(int x, int y) {
         Graphics2D g = this.mapa.getGraphics2D();
+        g.setStroke(new BasicStroke(2));
         if (isNodo) {
             g.setColor(Color.BLACK);
             g.fillOval( x - TAM_NODOS / 2, y - TAM_NODOS / 2, TAM_NODOS, TAM_NODOS);
