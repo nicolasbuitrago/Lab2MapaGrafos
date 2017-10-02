@@ -15,13 +15,16 @@ import codigo.model.Mapa;
 public class Ventana extends javax.swing.JFrame {
     
     Controller control;
+    boolean visible;
     
     public Ventana(Controller control) {
-        initComponents();
+        initComponents();visible = false;
         control.setMapa(new Mapa(jpMapa));
         jpMapa.add(control.getMapa());
         jpMapa.repaint();
         lblHoraLlegada.setVisible(false);
+        lblTiempo.setVisible(false);
+        lblTiempo.setVisible(false);
         control.setHoras(lblHoraActual,lblHoraLlegada);
 //        lblHoraActual.setText(control.horaActual());
         this.setLocationRelativeTo(null);
@@ -32,6 +35,13 @@ public class Ventana extends javax.swing.JFrame {
     
     public void setDistancia(String distancia){
         lblDistancia.setText(distancia);
+    }
+    
+    public void visible(){
+        this.visible = !this.visible;
+        this.lblDistancia.setVisible(visible);
+        this.lblHoraLlegada.setVisible(visible);
+        this.lblTiempo.setVisible(visible);
     }
             
 
