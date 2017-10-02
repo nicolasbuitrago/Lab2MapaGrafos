@@ -127,7 +127,7 @@ public class ControlGraphics {
         if(!ruta&&nodoFinal!=null){
             ruta = true;
             g.setStroke(new BasicStroke(5));
-////            drawNodo(g,grafo.calcularRuta(nodoInicial,nodoFinal));
+//            drawNodo(g,grafo.calcularRuta(nodoInicial,nodoFinal));
             paintRuta(g,grafo.calcularRuta(nodoInicial,nodoFinal));
             drawNodo(g,nodoInicial,"P");
             drawNodo(g,nodoFinal,"L");            

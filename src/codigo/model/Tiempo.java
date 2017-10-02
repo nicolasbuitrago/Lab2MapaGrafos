@@ -37,11 +37,16 @@ public class Tiempo extends Thread{
         }
     }
     
-    public void start(int segundos){
+    public void start(double minutos){
         this.time = LocalTime.now();
-        this.time.plusSeconds((long)segundos);
+        this.time.plusMinutes((long)minutos);
         this.label.setVisible(true);
-        this.start();
+        if(!isAlive()){
+            this.start();
+        }else{
+            this.stop();
+        }
+        
     }
 
     public String fromHoraMilitar(){

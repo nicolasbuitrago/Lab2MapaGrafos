@@ -60,8 +60,8 @@ public class Controller {
         this.horaLlegada = new Tiempo(horaLlegada);
     }
     
-    public void setHoraLlegada(int segundos){
-        horaLlegada.start(segundos);
+    public void setHoraLlegada(double minutos){
+        horaLlegada.start(minutos);
     }
     
     private void getGrafo(){
@@ -95,8 +95,9 @@ public class Controller {
         }
     }
     
-    private int getTiempo(int distancia){//5km/h   5000m/h    83.33m/min
-        return (int)distancia/84;
+    private double getTiempo(int distancia){//5km/h   5000m/h    83.33m/min
+        System.out.println("Tiempo = "+distancia/84);
+        return distancia/84;
     }
             
     public void nodo(){graphics.isNodo=!graphics.isNodo;};   //VER  QUE LA CANTIDAD DE NODOS COINCIDA CON EL NAME DEL ULTIMO NODO
@@ -107,7 +108,7 @@ public class Controller {
             public void mouseClicked(MouseEvent e) {
 //                graphics.crearGrafoMapa(e.getX(),e.getY());    //Metodo para crear un grafo a partir de los clicks en el panel
                 if(graphics.getPoints(e.getX(),e.getY())){//   System.out.println(grafo.buscarNodo(e.getX(),e.getY()));
-                    int dist =grafo.getMinDistancia();
+                    int dist =grafo.getMinDistancia();System.out.println("distancia = "+dist);
                     ventana.setDistancia(Integer.toString(dist));
                     setHoraLlegada(getTiempo(dist));
                     ventana.visible();
