@@ -246,13 +246,13 @@ public class Grafo {
     public Nodo puntoP(Nodo ni){
         double x,y,u;
         Arco ar = arcoMasCercano(ni);
-        Nodo p, a = ar.getNodoInicial(), b = ar.getNodoFinal();
+        Nodo a = ar.getNodoInicial(), b = ar.getNodoFinal();
         u = factorU(ni, ar);
         x = a.getX() + u * (b.getX() - a.getX());
         y = a.getY() + u * (b.getY() - a.getY());
-        p = new Nodo((int) x, (int) y);    //System.out.println("p = "+p+"\n ar= "+ar);
+//        p = new Nodo((int) x, (int) y);    //System.out.println("p = "+p+"\n ar= "+ar);
 //        }
-        return p;
+        return new Nodo((int) x, (int) y);
     }
     
     private Nodo puntoP(Arco ar,double u){
@@ -269,7 +269,7 @@ public class Grafo {
     private int distanciaRectaPunto(Nodo c, Arco ar){
         double u = factorU(c, ar),x,y;//   System.out.println("u = "+u);
         double d = Integer.MAX_VALUE;
-        Nodo p, a = ar.getNodoInicial(), b = ar.getNodoFinal();
+        Nodo a = ar.getNodoInicial(), b = ar.getNodoFinal();
         if (u >= 0 && u <= 1) {
 //            x = a.getX()+u*(b.getX()-a.getX());
 //            y = a.getY()+u*(b.getY()-a.getY());
@@ -308,21 +308,21 @@ public class Grafo {
         boolean[] visto = new boolean[nodos.size()];
         ArrayList<Ruta> rutas = new ArrayList();
         adyacencia();//System.out.println("\n\n\n\n");
-        int f = nodos.indexOf(nf);
+//        int f = nodos.indexOf(nf);
         for (Nodo nodo : nodos) {
-            int i = nodos.indexOf(nodo);
+            int i = nodo.getName();
             distancia[i] = Integer.MAX_VALUE;
             padre[i] = null;
             visto[i] = false;
         }
-        distancia[nodos.indexOf(ni)] = 0;
+        distancia[ni.getName()] = 0;
         ArrayList<Nodo> cola =  new ArrayList();  // cola de prioridad
         Ruta ruta = new Ruta();     ruta.add(ni);
         cola.add(ni);     rutas.add(ruta);
         while (!cola.isEmpty()) {
             Nodo nod = extraerMinimo(cola);
-            int u = nodos.indexOf(nod);
-            visto[nodos.indexOf(nod)] = true;
+            int u = nod.getName();
+            visto[nod.getName()] = true;
             for (int j = 0; j < nodos.size(); j++) {
                 if(adyacencia[u][j] == 1 && !visto[j] &&distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
                     distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
@@ -388,11 +388,11 @@ public class Grafo {
             for (Arco arco : arcos) {
                 if (arco.getNodoInicial().equals(nodo)) {
 //                    adya.add(arco.getNodoFinal());
-                    adyacencia[nodos.indexOf(nodo)][nodos.indexOf(arco.getNodoFinal())]=1;
+                    adyacencia[nodo.getName()][arco.getNodoFinal().getName()]=1;
                 }
                 if (arco.getNodoFinal().equals(nodo)) {
 //                    adya.add(arco.getNodoInicial());
-                    adyacencia[nodos.indexOf(nodo)][nodos.indexOf(arco.getNodoInicial())]=1;
+                    adyacencia[nodo.getName()][arco.getNodoInicial().getName()]=1;
                 }
             }
         } 
@@ -408,7 +408,7 @@ public class Grafo {
         int min = Integer.MAX_VALUE; Nodo nod= null;
         for (Nodo nodo : n) {
             for (int j = 0; j < nodos.size(); j++) {
-                if(adyacencia[nodos.indexOf(nodo)][j] == 1){
+                if(adyacencia[nodo.getName()][j] == 1){
                     if(distancia(nodo,nodos.get(j))<min){
                         min = distancia(nodo,nodos.get(j));
                         nod = nodo;
@@ -422,7 +422,7 @@ public class Grafo {
     
     private void imprimirRuta(Ruta ruta){
         for (Object object : ruta.getRuta()) {
-            System.out.print(nodos.indexOf((Nodo)object)+"   ");
+            System.out.print(((Nodo)object).getName()+"   ");
         }
         System.out.println("\n");
     }

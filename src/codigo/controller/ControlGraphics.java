@@ -101,7 +101,7 @@ public class ControlGraphics {
             drawArco(g,arco);
         }
         for (Nodo nodo : grafo.getNodos()) {
-            drawNodo(g,nodo,Integer.toString(grafo.getNodos().indexOf(nodo)));
+            drawNodo(g,nodo,Integer.toString(nodo.getName()));
         }
         
         g.dispose();

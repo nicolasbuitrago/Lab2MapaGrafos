@@ -81,8 +81,8 @@ public class Controller {
             v = gra.readLine();
             while (v != null) {                
                 String[] c = v.split(",");//System.out.println("c.length = "+c.length);
-                if(c.length==2){
-                    grafo.addNodo(new Nodo(grafo.getCantNodos(),Integer.parseInt(c[0]),Integer.parseInt(c[1])));
+                if(c.length==3){
+                    grafo.addNodo(new Nodo(Integer.parseInt(c[0]),Integer.parseInt(c[1]),Integer.parseInt(c[2])));
                 }else{
                     Nodo ni = grafo.buscarNodo(toInt(c[0]),toInt(c[1])), nf = grafo.buscarNodo(toInt(c[2]),toInt(c[3]));
                     grafo.addArco(new Arco(ni,nf,toInt(c[4])));
@@ -102,14 +102,14 @@ public class Controller {
         }
     }
     
-    public void nodo(){graphics.isNodo=!graphics.isNodo;};
+    public void nodo(){graphics.isNodo=!graphics.isNodo;};   //VER  QUE LA CANTIDAD DE NODOS COINCIDA CON EL NAME DEL ULTIMO NODO
     
     private void listener(){
         this.mapa.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
-//                graphics.crearGrafoMapa(e.getX(),e.getY());    //Metodo para crear un grafo a partir de los clicks en el panel
-                graphics.getPoints(e.getX(),e.getY());  //             System.out.println("x = "+e.getX()+", "+e.getY());
+                graphics.crearGrafoMapa(e.getX(),e.getY());    //Metodo para crear un grafo a partir de los clicks en el panel
+//                graphics.getPoints(e.getX(),e.getY());  //             System.out.println("x = "+e.getX()+", "+e.getY());
             }
 
             @Override

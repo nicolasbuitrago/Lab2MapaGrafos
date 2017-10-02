@@ -46,7 +46,7 @@ public class Nodo {
 
     @Override
     public String toString() {
-        return x + "," + y;
+        return name + "," + x + "," + y;
     }
 
     @Override
@@ -70,9 +70,9 @@ public class Nodo {
             return false;
         }
         final Nodo other = (Nodo) obj;
-        if (this.name != other.name) {
-            return false;
-        }
+//        if (this.name != other.name) {
+//            return false;
+//        }
         if (this.x != other.x) {
             return false;
         }
