@@ -113,7 +113,7 @@ public class ControlGraphics {
 //        panel.repaint();
     }
 
-    public void getPoints(int x, int y) {
+    public boolean getPoints(int x, int y) {
         Graphics2D g = this.mapa.getGraphics2D();
         Nodo nodo = new Nodo(x- TAM_NODOS / 2,y- TAM_NODOS / 2);
 //        g.setColor(Color.red);
@@ -134,6 +134,7 @@ public class ControlGraphics {
         }
         g.dispose();
         mapa.repaint();
+        return ruta;
     }
 
     private void paintRuta(Graphics2D g,ArrayList ruta) {

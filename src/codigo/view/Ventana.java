@@ -28,6 +28,10 @@ public class Ventana extends javax.swing.JFrame {
         this.setVisible(true);
         this.control = control;
     }
+    
+    public void setDistancia(String distancia){
+        lblDistancia.setText(distancia);
+    }
             
 
     /**

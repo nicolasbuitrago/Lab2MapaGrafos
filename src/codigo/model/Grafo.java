@@ -7,23 +7,18 @@ package codigo.model;
 
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Stack;
-import java.util.Vector;
 
 /**
  *
  * @author Estudiante
  */
 public class Grafo {
-    ArrayList<Nodo> nodos;   //public Arco ai;      Nodo p;
-    ArrayList<Arco> arcos;
-    int cantNodos = 0;
+    private ArrayList<Nodo> nodos;   //public Arco ai;      Nodo p;
+    private ArrayList<Arco> arcos;
+//  private int cantNodos = 0;
     public static final int TAM_NODOS = 20;
-    int matriz[][];
+    private int matriz[][];
+    private int minDistancia;
 
     public Grafo() {
         nodos = new ArrayList();
@@ -115,6 +110,10 @@ public class Grafo {
         arcos.add(arco);
     }
     
+    public int getMinDistancia(){
+        return minDistancia;
+    }
+    
     public int distancia(int x1, int y1, int x2, int y2){
         return (int) Math.sqrt(Math.pow(x2-x1, 2.0)+Math.pow(y2-y1, 2.0));
     }
@@ -163,11 +162,15 @@ public class Grafo {
 //        ruta.add(ai);
         Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);   System.out.println(ai+" - "+printArco(af));
         Ruta r = eleccion(ni,ai,nf,af);
-    
+        minDistancia = r.getDistancia();
         ruta.addAll(getArcosRuta(r));
         
-        ruta.add(new Arco(ni,r.get(0)));
-//        ruta.add(new Arco(nf,r.getLast()));
+        Arco a = new Arco(ni,r.get(0));
+        ruta.add(a);
+        minDistancia += a.getDist();
+        a = new Arco(nf,r.getLast());
+        ruta.add(a);
+        minDistancia = a.getDist();
         
 //        ruta.add(af);
 //        ruta.add(nf);

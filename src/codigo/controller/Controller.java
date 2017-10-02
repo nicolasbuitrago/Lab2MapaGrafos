@@ -109,7 +109,9 @@ public class Controller {
             @Override
             public void mouseClicked(MouseEvent e) {
 //                graphics.crearGrafoMapa(e.getX(),e.getY());    //Metodo para crear un grafo a partir de los clicks en el panel
-                graphics.getPoints(e.getX(),e.getY());//   System.out.println(grafo.buscarNodo(e.getX(),e.getY()));
+                if(graphics.getPoints(e.getX(),e.getY())){//   System.out.println(grafo.buscarNodo(e.getX(),e.getY()));
+                    ventana.setDistancia(Integer.toString(grafo.getMinDistancia()));
+                }
             }
 
             @Override
