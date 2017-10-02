@@ -268,6 +268,13 @@ public class Grafo {
         return a;
     }
     
+    /**
+     * Metodo usado para encontrar el factor u usado para hallar la distancia del punto en el que usuario dio click sobre el panel
+     * al la arista ar
+     * @param c nodo que contiene la informacion de donde el usuario dio click
+     * @param ar el arco del cual se hallara su distancia al punto C
+     * @return 
+     */
     private double factorU(Nodo c, Arco ar){
         Nodo a = ar.getNodoInicial(), b = ar.getNodoFinal();
         double u;
@@ -276,6 +283,11 @@ public class Grafo {
         return u;
     }
     
+    /**
+     * si el factor u es el adecuado se puede hallar el punto mas cercano del Nodo ni al arco
+     * @param ni nodo del cual se quiere hallar su punto mas cercano sobre la arista
+     * @return  el nodo ni reflejado sobre su arista mas cercana
+     */
     public Nodo puntoP(Nodo ni){
         double x,y,u;
         Arco ar = arcoMasCercano(ni);
@@ -299,6 +311,12 @@ public class Grafo {
         return p;
     }
     
+    /**
+     * Metodo usado para hallar la distancia entre un punto yuna recta
+     * @param c 
+     * @param ar
+     * @return la distancia entre el punto c y la arista ar
+     */
     private int distanciaRectaPunto(Nodo c, Arco ar){
         double u = factorU(c, ar),x,y;//   System.out.println("u = "+u);
         double d = Integer.MAX_VALUE;
@@ -332,9 +350,15 @@ public class Grafo {
     
     */
     
+    /**
+     * Meotod Dijkstra con pequeñas modificaciones usado para poder hallar el camino mas corto entre dos nodos de un grafo
+     * @param ni
+     * @param nf
+     * @return la ruta mas corta
+     */
     private Ruta dijkstra(Nodo ni,Nodo nf){
         int[] distancia = new int[nodos.size()];
-        Nodo[] padre = new Nodo[nodos.size()];
+//        Nodo[] padre = new Nodo[nodos.size()];
         boolean[] visto = new boolean[nodos.size()];
         ArrayList<Ruta> rutas = new ArrayList();
         adyacencia();//System.out.println("\n\n\n\n");
@@ -342,7 +366,7 @@ public class Grafo {
         for (Nodo nodo : nodos) {
             int i = nodo.getName();
             distancia[i] = Integer.MAX_VALUE;
-            padre[i] = null;
+//            padre[i] = null;
             visto[i] = false;
         }
         distancia[ni.getName()] = 0;
@@ -368,6 +392,12 @@ public class Grafo {
         return Ruta.rutaMasCorta(rutas,nf);
     }
     
+    /**
+     * Añade un nodo a la subruta mas corta que termine en el nodo nod para añadirle el nodo no
+     * @param rutas el ArrayList que contiene todas la rutas armadas hasta ahora ppor el algoritmo Dijkstra
+     * @param nod el nodo padre de no
+     * @param no el nodo que se añadira a la nueva ruta
+     */
     public void add(ArrayList<Ruta> rutas,Nodo nod,Nodo no){
 //        for (Ruta ruta : rutas) {
 //            if (ruta.getLast().equals(nod)) {
@@ -385,6 +415,12 @@ public class Grafo {
         rutas.add(r);
     }
     
+    /**
+     * Metodo que contiene la subruta mas corta dentro del arraylist que le hes pasado por parametro
+     * @param rutas arrayList de rutas en el cual se buscara la subruta mas corta
+     * @param nod el nodo en el cual debe terminar la subruta
+     * @return la subruta que termina en nod y que es la mas corta entre todas las rutas del arrayList
+     */
     private Ruta subRutaMasCorta(ArrayList<Ruta> rutas, Nodo nod){
         Ruta min = new Ruta();  min.addDistancia(Integer.MAX_VALUE);
         for (Ruta ruta : rutas) {
@@ -397,6 +433,11 @@ public class Grafo {
         return min;
     }
     
+    /**
+     * Metodo que obtiene la distancia que recorre toda la ruta
+     * @param ruta la ruta a la cual se le sacara la distancia
+     * @return la distancia que hay que recorrer para caminar por toda la ruta
+     */
     private int distancia(Ruta ruta){
         int distancia = 0;
         ArrayList<Nodo> rut = ruta.getRuta();
@@ -406,6 +447,9 @@ public class Grafo {
         return distancia;
     }
     
+    /**
+     * Metodo que se encarga de obtener la matriz de adyacencia usada por el algoritmo Dijkstra
+     */
     public void adyacencia(){
         adyacencia = new int[nodos.size()][nodos.size()];
         for (int i = 0; i < nodos.size(); i++) {
@@ -433,6 +477,11 @@ public class Grafo {
 //        }
     }
    
+    /**
+     * Metodo que se encarga de extraer el nodo adyacente a 
+     * @param n                                                        REVISAR ESTA FUNCION
+     * @return 
+     */
     private Nodo extraerMinimo(ArrayList<Nodo> n){
         int min = Integer.MAX_VALUE; Nodo nod= null;
         for (Nodo nodo : n) {
