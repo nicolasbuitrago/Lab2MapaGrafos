@@ -168,7 +168,7 @@ public class Grafo {
 //        }
 //        Nodo nodoi = puntoP(ai,factorU(ni,ai)), nodof = puntoP(af,factorU(nf,af));
 //        ArrayList<Arco> ruta = new ArrayList();
-        imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));     
+//        imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));     
         
 
         Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);   System.out.println(printArco(ai)+" - "+printArco(af));

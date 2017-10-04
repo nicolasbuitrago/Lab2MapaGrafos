@@ -117,7 +117,7 @@ public class Controller {
      */
     private double getTiempo(int distancia){//5km/h   5000m/h    83.33m/min
         System.out.println("Tiempo = "+distancia/83.33);
-        return distancia/83.33;
+        return Math.ceil(distancia/83.33);
     }
             
     public void nodo(){graphics.isNodo=!graphics.isNodo;};   //VER  QUE LA CANTIDAD DE NODOS COINCIDA CON EL NAME DEL ULTIMO NODO
