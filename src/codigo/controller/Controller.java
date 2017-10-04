@@ -129,7 +129,8 @@ public class Controller {
             public void mouseClicked(MouseEvent e) {
 //                graphics.crearGrafoMapa(e.getX(),e.getY());    //Metodo para crear un grafo a partir de los clicks en el panel
                 if(graphics.getPoints(e.getX(),e.getY())){//   System.out.println(grafo.buscarNodo(e.getX(),e.getY()));
-                    int dist =grafo.getMinDistancia();System.out.println("Distancia = "+dist);
+                    int dist = grafo.getMinDistancia();
+                    System.out.println("Distancia = "+dist);
                     ventana.setDistancia(Integer.toString(dist));
                     setHoraLlegada(getTiempo(dist));
                     ventana.visible();

@@ -171,9 +171,9 @@ public class Grafo {
         imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));     
         
 
-        Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);   System.out.println(ai+" - "+printArco(af));
+        Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);   System.out.println(printArco(ai)+" - "+printArco(af));
         Ruta r = eleccion(ni,ai,nf,af);
-        minDistancia = r.getDistancia();
+        minDistancia += r.getDistancia();
         ArrayList<Arco> ruta = getArcosRuta(r);
         
         Arco a = new Arco(ni,r.get(0));
@@ -181,8 +181,8 @@ public class Grafo {
         minDistancia += a.getDist();
         a = new Arco(nf,r.getLast());
         ruta.add(a);
-        minDistancia = a.getDist();
-        
+        minDistancia += a.getDist();
+  
 //        ruta.add(af);
 //        ruta.add(nf);
         return ruta;
@@ -378,7 +378,7 @@ public class Grafo {
             int u = nod.getName();
             visto[nod.getName()] = true;
             for (int j = 0; j < nodos.size(); j++) {
-                if(adyacencia[u][j] == 1 && !visto[j] &&distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
+                if(adyacencia[u][j] == 1 && !visto[j] && distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
                     distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
                     add(rutas,nod,nodos.get(j));
                     cola.add(nodos.get(j));   //if(j==f)return Ruta.rutaMasCorta(rutas,nf);
@@ -487,8 +487,9 @@ public class Grafo {
         for (Nodo nodo : n) {
             for (int j = 0; j < nodos.size(); j++) {
                 if(adyacencia[nodo.getName()][j] == 1){
-                    if(distancia(nodo,nodos.get(j))<min){
-                        min = distancia(nodo,nodos.get(j));
+                    int dist = distancia(nodo,nodos.get(j));
+                    if(dist<min){
+                        min = dist;
                         nod = nodo;
                     }
                 }
