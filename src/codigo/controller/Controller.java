@@ -70,7 +70,7 @@ public class Controller {
      * ademas establece en el label tiempo de la ventana el tiempo que se supone que tardara en llegar asu destino
      * @param minutos 
      */
-    public void setHoraLlegada(double minutos){
+    public void setHoraLlegada(double minutos){  
         horaLlegada.start(minutos);
         ventana.setTiempo((int)minutos);
     }
