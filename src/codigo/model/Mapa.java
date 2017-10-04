@@ -14,7 +14,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
- *
+ * Es la clase que hereda de panel en la cual  se dibuja la imagen del mapa y sobre la 
+ * cual se trabajan todos los graficos que dibujan el grafo y la ruta
  * @author nicolasbuitrago
  */
 public class Mapa extends JPanel {

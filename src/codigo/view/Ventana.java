@@ -9,7 +9,7 @@ import codigo.controller.Controller;
 import codigo.model.Mapa;
 
 /**
- *
+ * Esta clase es un Jframe que funciona como la unica vista del programa
  * @author nicolasbuitrago
  */
 public class Ventana extends javax.swing.JFrame {

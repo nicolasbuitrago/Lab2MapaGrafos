@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 import javax.swing.JLabel;
 
 /**
- *
+ * Esta clase se encaraga de controlar todo el programa
  * @author nicolasbuitrago
  */
 public class Controller {

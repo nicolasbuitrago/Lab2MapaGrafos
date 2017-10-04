@@ -15,7 +15,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
- *
+ * Esta clase de encraga de controlar todo lo relacionadocon los graficos del programa
  * @author nicolasbuitrago
  */
 public class ControlGraphics {

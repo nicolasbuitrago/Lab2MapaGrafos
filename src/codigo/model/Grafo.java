@@ -9,7 +9,7 @@ package codigo.model;
 import java.util.ArrayList;
 
 /**
- *
+ * Es la clase que se encaraga de encaragarse con todo auqello relacionado con el grafo
  * @author Estudiante
  */
 public class Grafo {

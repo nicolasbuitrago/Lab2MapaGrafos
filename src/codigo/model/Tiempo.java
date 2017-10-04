@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JLabel;
 
 /**
- *
+ * Es un hilo que se encaraga de mantener actualizadolas horas en la ventana
  * @author nicolasbuitrago
  */
 public class Tiempo extends Thread{
@@ -74,6 +74,9 @@ public class Tiempo extends Thread{
         return Integer.toString(h)+":"+time[1]+m;
     }
     
+    /**
+     * Metodo que se encarga de hacer que el hilo detenga su ejecucion por 60 segundos
+     */
     private void esperar() {
         try {
             Thread.sleep(1000);
