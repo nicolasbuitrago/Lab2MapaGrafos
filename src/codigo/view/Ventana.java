@@ -43,6 +43,10 @@ public class Ventana extends javax.swing.JFrame {
         this.lblHoraLlegada.setVisible(visible);
         this.lblTiempo.setVisible(visible);
     }
+    
+    public void setTiempo(int tiempo){
+        lblTiempo.setText(Integer.toString(tiempo)+" minutos");
+    }
             
 
     /**

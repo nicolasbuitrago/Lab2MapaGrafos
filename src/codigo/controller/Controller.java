@@ -67,10 +67,12 @@ public class Controller {
     
     /**
      * Metodo que se encaraga de darle la hora de llegada al label en ventana y establecerle su hora
+     * ademas establece en el label tiempo de la ventana el tiempo que se supone que tardara en llegar asu destino
      * @param minutos 
      */
     public void setHoraLlegada(double minutos){
         horaLlegada.start(minutos);
+        ventana.setTiempo((int)minutos);
     }
     
     /**
