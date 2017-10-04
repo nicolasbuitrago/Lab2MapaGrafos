@@ -47,13 +47,13 @@ public class Tiempo extends Thread{
     public void start(double minutos){
         this.time = LocalTime.now().plusMinutes((long)minutos); System.out.println("Tiempo = "+minutos);
         label.setText(fromHoraMilitar());
-        if(isAlive()){
-            this.stop();
-            this.label.setVisible(false);
-        }else{
+        if (this.isAlive()) {
+            this.resume();
+        } else {
             this.start();
-            this.label.setVisible(true);
         }
+//        this.label.setVisible(true);
+
         
     }
     

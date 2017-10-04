@@ -200,6 +200,9 @@ public class Controller {
      */
     public void restablecer(){
         this.graphics.restablecer();
+        if(horaLlegada.isAlive()){
+            horaLlegada.suspend();
+        }
 //        this.graphics.paintMapa(); //Pinta el grafo sobre el mapa
     }
 
