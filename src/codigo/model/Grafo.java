@@ -478,9 +478,9 @@ public class Grafo {
     }
    
     /**
-     * Metodo que se encarga de extraer el nodo adyacente a 
-     * @param n                                                        REVISAR ESTA FUNCION
-     * @return 
+     * Metodo que se encarga de encontrar, retornar y eliminar el nodo con el adyacente mas cercano de toda la lista  n
+     * @param n la lista de todos los nodos que seran comparados
+     * @return el nodo con el adyacente mas cercano
      */
     private Nodo extraerMinimo(ArrayList<Nodo> n){
         int min = Integer.MAX_VALUE; Nodo nod= null;
@@ -499,6 +499,10 @@ public class Grafo {
         return nod;
     }
     
+    /**
+     * Un pequeño metodo que imprime en consola los nodos pertencientes a la ruta pasada por parametro
+     * @param ruta la ruta a la cual  se le van a mostar sus vertices
+     */
     private void imprimirRuta(Ruta ruta){
         for (Object object : ruta.getRuta()) {
             System.out.print(((Nodo)object).getName()+"   ");

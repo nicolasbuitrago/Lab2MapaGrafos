@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Estudiante
+ * @author nicolasbuitrago
  */
 public class Mapa extends JPanel {
     
@@ -30,7 +30,10 @@ public class Mapa extends JPanel {
         this.setSize(padre.getWidth(), padre.getHeight()); //se selecciona el tamaño del panel
     }
 
-//Se crea un método cuyo parámetro debe ser un objeto Graphics
+    /**
+     * Metodo que pinta el panel que contiene el mapa
+     * @param grafico 
+     */
     @Override
     public void paint(Graphics grafico) {
         Dimension height = getSize();
@@ -52,6 +55,9 @@ public class Mapa extends JPanel {
         super.paintComponent(grafico);
     }
     
+    /**
+     * Metodo que se encarga de dibujar el mapa de nuevo sobre el panel sin todos los nodos y sin rutas en el
+     */
     public void reset(){
         try {
             imagen = ImageIO.read(getClass().getResource("/Imagenes/mapa.png")); // la carga en una BufferedReader

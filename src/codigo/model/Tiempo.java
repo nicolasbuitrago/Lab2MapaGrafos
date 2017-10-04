@@ -27,7 +27,10 @@ public class Tiempo extends Thread{
         this.time = time;
         this.label = label;
     }
-
+    
+    /**
+     * Metodo sobreescrito de su clase padre Thread usado para ir aumentando el tiempo en un minuto
+     */
     @Override
     public void run() {
         while(true){
@@ -37,6 +40,10 @@ public class Tiempo extends Thread{
         }
     }
     
+    /**
+     * Metodo que se usa para iniciar el hilo y ademas sumarle cierta cantidad de miinutos al tiempo
+     * @param minutos los minutos que se le van a sumar al tiempo para despues empezar el hilo y comenzar a contar.
+     */
     public void start(double minutos){
         this.time = LocalTime.now().plusMinutes((long)minutos); System.out.println("Tiempo = "+minutos);
         label.setText(fromHoraMilitar());
@@ -49,7 +56,12 @@ public class Tiempo extends Thread{
         }
         
     }
-
+    
+    /**
+     * Metodo que transforma el atributo LocalTime de su formato original a un string que indica 
+     * el tiempo en un sistema de horario de 12 horas
+     * @return devuelve el string que sera mostrado en los labels horaActual y hhoraLlegada
+     */
     public String fromHoraMilitar(){
         String hora = time.format(DateTimeFormatter.ofPattern("HH:mm"));
         String[] time = hora.split(":");
