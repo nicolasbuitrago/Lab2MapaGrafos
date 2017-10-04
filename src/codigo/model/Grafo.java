@@ -170,7 +170,7 @@ public class Grafo {
 //        ArrayList<Arco> ruta = new ArrayList();
 //        imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));     
         
-
+        this.minDistancia = 0;
         Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);   System.out.println(printArco(ai)+" - "+printArco(af));
         Ruta r = eleccion(ni,ai,nf,af);
         minDistancia += r.getDistancia();

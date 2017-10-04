@@ -38,8 +38,7 @@ public class Tiempo extends Thread{
     }
     
     public void start(double minutos){
-        this.time = LocalTime.now();
-        this.time = this.time.plusMinutes((long)minutos); System.out.println("Tiempo = "+minutos);
+        this.time = LocalTime.now().plusMinutes((long)minutos); System.out.println("Tiempo = "+minutos);
         label.setText(fromHoraMilitar());
         if(isAlive()){
             this.stop();

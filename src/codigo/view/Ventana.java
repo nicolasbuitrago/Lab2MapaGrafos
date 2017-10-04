@@ -44,6 +44,13 @@ public class Ventana extends javax.swing.JFrame {
         this.lblTiempo.setVisible(visible);
     }
     
+    private void visible(boolean b){
+        this.visible = b;
+        this.lblDistancia.setVisible(visible);
+        this.lblHoraLlegada.setVisible(visible);
+        this.lblTiempo.setVisible(visible);
+    }
+    
     public void setTiempo(int tiempo){
         lblTiempo.setText(Integer.toString(tiempo)+" minutos");
     }
@@ -223,7 +230,7 @@ public class Ventana extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 //        control.paintMapa(100, 50);
 //        control.nodo();
-        this.visible = false;
+        this.visible(false);
         control.restablecer();
 ////        jpMapa.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
