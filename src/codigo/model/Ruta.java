@@ -70,8 +70,20 @@ public class Ruta implements Comparable{
     public static Ruta rutaMasCorta(ArrayList<Ruta> rutas, Nodo nf){
         Ruta min = new Ruta(Integer.MAX_VALUE);
         for (Ruta ruta : rutas) {
-            if(ruta.compareTo(min)<0 && ruta.ruta.get(ruta.ruta.size()-1).equals(nf)){
-                min = ruta;
+            if(ruta.compareTo(min) < 0 ){
+                
+                if (ruta.getLast().equals(nf)) {
+                    if (!ruta.ruta.isEmpty()) {
+                        min = ruta;
+                    }
+                } else if (ruta.contains(nf)) {
+                    Ruta r = ruta.subRuta(nf);
+                    if ( min.compareTo(r) > 0) {
+                        min = r;
+                        min.addDistancia(Grafo.distancia(min));
+                    }
+                }
+                
             }//else if(min.compareTo(ruta)==0) System.out.println("SON IGUALES LAS RUTAS =0");
         }
         return min;

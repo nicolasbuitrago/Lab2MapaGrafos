@@ -366,7 +366,6 @@ public class Grafo {
         for (Nodo nodo : nodos) {
             int i = nodo.getName();
             distancia[i] = Integer.MAX_VALUE;
-//            padre[i] = null;
             visto[i] = false;
         }
         distancia[ni.getName()] = 0;
@@ -374,21 +373,17 @@ public class Grafo {
         Ruta ruta = new Ruta();     ruta.add(ni);
         cola.add(ni);     rutas.add(ruta);
         while (!cola.isEmpty()) {
-            Nodo nod = extraerMinimo(cola);
+            Nodo nod = extraerUltimo(cola);
             int u = nod.getName();
             visto[nod.getName()] = true;
             for (int j = 0; j < nodos.size(); j++) {
-                if(adyacencia[u][j] == 1 && !visto[j] && distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
+                if(adyacencia[u][j] == 1 && distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
                     distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
                     add(rutas,nod,nodos.get(j));
-                    cola.add(nodos.get(j));   //if(j==f)return Ruta.rutaMasCorta(rutas,nf);
+                    cola.add(nodos.get(j));   if(j==nf.getName()){ imprimirRuta(Ruta.rutaMasCorta(rutas,nf));System.out.println("+++++");}
                 }
             }
-        }//System.out.println("padre = "+nodos.indexOf(padre[f]));
-//        for (int i = 0; i < nodos.size(); i++) {
-//            System.out.print(nodos.indexOf(padre[i])+" ");
-//        }
-        //System.out.println("\n\n\ndistancia = "+distancia[nodos.indexOf(nf)]);
+        }
         return Ruta.rutaMasCorta(rutas,nf);
     }
     
@@ -399,16 +394,13 @@ public class Grafo {
      * @param no el nodo que se añadira a la nueva ruta
      */
     public void add(ArrayList<Ruta> rutas,Nodo nod,Nodo no){
-//        for (Ruta ruta : rutas) {
-//            if (ruta.getLast().equals(nod)) {
-//                ruta.add(no);
-//                ruta.addDistancia(distancia(nod,no));
-////                if (o instanceof Arco) {
-////                   ruta.addDistancia(((Arco) o).getDist());
-////                }
-//                return;
-//            }
-//        }Ruta.rutaMasCorta(rutas,nf)
+        for (Ruta ruta : rutas) {
+            if (ruta.getLast().equals(nod)) {
+                ruta.add(no);
+                ruta.addDistancia(distancia(nod,no));
+                return;
+            }
+        }
         Ruta r = subRutaMasCorta(rutas,nod);
         r.add(no);
         r.addDistancia(distancia(nod,no));
@@ -438,7 +430,7 @@ public class Grafo {
      * @param ruta la ruta a la cual se le sacara la distancia
      * @return la distancia que hay que recorrer para caminar por toda la ruta
      */
-    private int distancia(Ruta ruta){
+    public static  int distancia(Ruta ruta){
         int distancia = 0;
         ArrayList<Nodo> rut = ruta.getRuta();
         for (int i = 0; i < rut.size()-1; i++) {
@@ -495,6 +487,12 @@ public class Grafo {
                 }
             }
         }
+        n.remove(nod);
+        return nod;
+    }
+    
+    private Nodo extraerUltimo(ArrayList<Nodo> n){
+        Nodo nod = n.get(n.size()-1);
         n.remove(nod);
         return nod;
     }
