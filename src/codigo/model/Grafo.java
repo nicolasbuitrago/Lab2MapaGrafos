@@ -363,7 +363,7 @@ public class Grafo {
 //        Nodo[] padre = new Nodo[nodos.size()];
         boolean[] visto = new boolean[nodos.size()];
         ArrayList<Ruta> rutas = new ArrayList();
-        adyacencia();//System.out.println("\n\n\n\n");
+//        adyacencia();//System.out.println("\n\n\n\n");
 //        int f = nodos.indexOf(nf);
         for (Nodo nodo : nodos) {
             int i = nodo.getName();
