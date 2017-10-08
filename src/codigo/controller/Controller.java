@@ -38,7 +38,7 @@ public class Controller {
         this.ventana = new Ventana(this);
         this.graphics = new ControlGraphics(this.grafo,this.mapa);
         this.graphics.paintGrafo(); //Dibuja el grafo sobre el mapa
-//        grafo.adyacencia();
+        grafo.adyacencia();
     }
 
     public Mapa getMapa() {

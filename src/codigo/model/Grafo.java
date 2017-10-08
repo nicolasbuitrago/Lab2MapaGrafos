@@ -361,7 +361,7 @@ public class Grafo {
 //        Nodo[] padre = new Nodo[nodos.size()];
         boolean[] visto = new boolean[nodos.size()];
         ArrayList<Ruta> rutas = new ArrayList();
-        adyacencia();//System.out.println("\n\n\n\n");
+//        adyacencia();//System.out.println("\n\n\n\n");
 //        int f = nodos.indexOf(nf);
         for (Nodo nodo : nodos) {
             int i = nodo.getName();
@@ -371,8 +371,10 @@ public class Grafo {
         }
         distancia[ni.getName()] = 0;
         ArrayList<Nodo> cola =  new ArrayList();  // cola de prioridad
-        Ruta ruta = new Ruta();     ruta.add(ni);
-        cola.add(ni);     rutas.add(ruta);
+        Ruta ruta = new Ruta();   //Queue cola = new LinkedList();
+        ruta.add(ni);
+        cola.add(ni);
+        rutas.add(ruta);
         while (!cola.isEmpty()) {
             Nodo nod = ExtraerPrimero(cola);
             int u = nod.getName();
