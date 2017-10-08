@@ -7,6 +7,8 @@ package codigo.model;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Es la clase que se encaraga de encaragarse con todo auqello relacionado con el grafo
@@ -370,10 +372,12 @@ public class Grafo {
         }
         distancia[ni.getName()] = 0;
         ArrayList<Nodo> cola =  new ArrayList();  // cola de prioridad
-        Ruta ruta = new Ruta();     ruta.add(ni);
-        cola.add(ni);     rutas.add(ruta);
+        Ruta ruta = new Ruta(); //Queue que = new LinkedList();
+        ruta.add(ni);
+        cola.add(ni);  
+        rutas.add(ruta);
         while (!cola.isEmpty()) {
-            Nodo nod = extraerUltimo(cola);
+            Nodo nod = extraerPrimero(cola);
             int u = nod.getName();
             visto[nod.getName()] = true;
             for (int j = 0; j < nodos.size(); j++) {
@@ -491,8 +495,8 @@ public class Grafo {
         return nod;
     }
     
-    private Nodo extraerUltimo(ArrayList<Nodo> n){
-        Nodo nod = n.get(n.size()-1);
+    private Nodo extraerPrimero(ArrayList<Nodo> n){
+        Nodo nod = n.get(0);
         n.remove(nod);
         return nod;
     }
