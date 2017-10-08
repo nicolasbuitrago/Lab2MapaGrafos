@@ -374,7 +374,7 @@ public class Grafo {
         Ruta ruta = new Ruta();     ruta.add(ni);
         cola.add(ni);     rutas.add(ruta);
         while (!cola.isEmpty()) {
-            Nodo nod = extraerMinimo(cola);
+            Nodo nod = ExtraerPrimero(cola);
             int u = nod.getName();
             visto[nod.getName()] = true;
             for (int j = 0; j < nodos.size(); j++) {
@@ -495,6 +495,12 @@ public class Grafo {
                 }
             }
         }
+        n.remove(nod);
+        return nod;
+    }
+    
+    private Nodo ExtraerPrimero(ArrayList<Nodo> n){
+        Nodo nod = n.get(0);
         n.remove(nod);
         return nod;
     }
