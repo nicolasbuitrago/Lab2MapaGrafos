@@ -37,7 +37,7 @@ public class Mapa extends JPanel {
      */
     @Override
     public void paint(Graphics grafico) {
-        Dimension height = getSize();
+//        Dimension height = getSize();
 //Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
 //        ImageIcon Img = new ImageIcon(getClass().getResource("/Imagenes/mapa.png"));
 

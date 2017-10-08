@@ -22,12 +22,6 @@ public class Ruta implements Comparable{
         this.distancia = 0;
     }
     
-//    private Ruta(Ruta ruta) {
-//        this.ruta = new ArrayList();
-//        this.ruta.addAll(ruta.ruta);
-//        this.distancia = ruta.distancia;
-//    }
-    
     private Ruta(List sub) {
         this.ruta = new ArrayList();
         this.ruta.addAll(sub);

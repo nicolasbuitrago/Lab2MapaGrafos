@@ -168,8 +168,7 @@ public class Grafo {
 //        }
 //        Nodo nodoi = puntoP(ai,factorU(ni,ai)), nodof = puntoP(af,factorU(nf,af));
 //        ArrayList<Arco> ruta = new ArrayList();
-//        imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));     
-        
+//        imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));
         this.minDistancia = 0;
         Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);   System.out.println(printArco(ai)+" - "+printArco(af));
         Ruta r = eleccion(ni,ai,nf,af);
@@ -237,8 +236,9 @@ public class Grafo {
             }
         }
         nodoi = buscarNodo(ni);
-        if(nodoi == null){
-            rutas.add(dijkstra(ai.getNodoInicial(), nodof));
+        if(nodoi == null){System.out.println("\n");
+            Ruta r = dijkstra(ai.getNodoInicial(), nodof); imprimirRuta(r);
+            rutas.add(dijkstra(ai.getNodoInicial(), nodof)); r = dijkstra(ai.getNodoFinal(), nodof); imprimirRuta(r);System.out.println("\n");
             rutas.add(dijkstra(ai.getNodoFinal(), nodof));
         }else{
             rutas.add(dijkstra(nodoi, nodof));
@@ -426,7 +426,7 @@ public class Grafo {
         for (Ruta ruta : rutas) {
             Ruta r = ruta.subRuta(nod);
             if (ruta.contains(nod) && min.compareTo(r)>0) {
-                min = ruta.subRuta(nod);
+                min = r;
                 min.addDistancia(distancia(min));
             }
         }

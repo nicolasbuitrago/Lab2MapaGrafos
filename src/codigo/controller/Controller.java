@@ -37,7 +37,7 @@ public class Controller {
         getGrafo(); //Obtiene el grafo del archivo Grafo.txt
         this.ventana = new Ventana(this);
         this.graphics = new ControlGraphics(this.grafo,this.mapa);
-//        this.graphics.paintGrafo(); //Dibuja el grafo sobre el mapa
+        this.graphics.paintGrafo(); //Dibuja el grafo sobre el mapa
 //        grafo.adyacencia();
     }
 
