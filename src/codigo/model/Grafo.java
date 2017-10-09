@@ -17,7 +17,7 @@ public class Grafo {
     private ArrayList<Arco> arcos;
 //  private int cantNodos = 0;
     public static final int TAM_NODOS = 20;
-    private int matriz[][];
+//    private int matriz[][];
     private int[][] adyacencia;
     private int minDistancia;
 
@@ -27,69 +27,8 @@ public class Grafo {
     }
     
     // <editor-fold defaultstate="collapsed" desc="Metodo insertar de la clase">   
-    /*public void insertar (Graphics g){
-        jPanel1.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if(rbNodo.isSelected()){
-                    g.setColor(Color.BLACK);
-                    g.fillOval(e.getX()-tamNodos/2, e.getY()-tamNodos/2, tamNodos, tamNodos);
-                    nodos.add(new Nodo(cantNodos,e.getX()-tamNodos/2,e.getY()-tamNodos/2,Color.red));
-                    g.setColor(Color.white);
-                    g.drawString(Integer.toString(cantNodos),e.getX(), e.getY());
-                    cantNodos++;
-                }else{
-                    if(nodoInicial==null){
-                        nodoInicial = buscarNodo(e.getX(),e.getY());
-                        if(nodoInicial!=null){
-                            seleccionarNodo(nodoInicial,g,Color.YELLOW);
-                        }
-                    }else{
-                        nodoFinal = buscarNodo(e.getX(),e.getY());
-                        if(nodoFinal!=null){
-                            seleccionarNodo(nodoFinal,g,Color.YELLOW);
-                            if(nodoFinal.getName()!=nodoInicial.getName()){
-                                g.setColor(Color.BLACK);
-                                g.drawLine(nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2);
-                                int dist = distancia(nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2);
-                                arcos.add(new Arco(nodoInicial.getName(),nodoFinal.name,nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2,
-                                dist));
-                                 g.drawString(Integer.toString(distancia(nodoInicial.x+tamNodos/2, nodoInicial.y+tamNodos/2, nodoFinal.x+tamNodos/2, nodoFinal.y+tamNodos/2)),nodoInicial.x+dist/2,nodoInicial.y+5);
-                            }else{
-                                seleccionarNodo(nodoInicial,g,Color.BLACK);
-                            }
-                            seleccionarNodo(nodoInicial,g,Color.BLACK);
-                            seleccionarNodo(nodoFinal,g,Color.BLACK);
-                            nodoInicial = null;
-                        }else{
-                            seleccionarNodo(nodoInicial,g,Color.BLACK);
-                            nodoInicial = null;
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                 
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                 
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                 
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                 
-            }
-        });
-    }*/// </editor-fold>  
+    
+    // </editor-fold>  
 
     public ArrayList<Nodo> getNodos() {
         return nodos;
@@ -500,7 +439,7 @@ public class Grafo {
     }
     
      private void calcularMatriz(){
-        matriz = new int [nodos.size()][nodos.size()];
+//        matriz = new int [nodos.size()][nodos.size()];
         for (Arco arco : arcos) {
 //            matriz[arco.getNodoInicial()][arco.getNodoFinal()] = arco.dist;
 //            matriz[arco.getNodoFinal()][arco.getNodoInicial()] = arco.dist;
@@ -512,8 +451,8 @@ public class Grafo {
          boolean vector[] = new boolean[nodos.size()];
          vector[0]=true;
          while (todosSeleccionados(vector)) {             
-             int min = menor(matriz,vector);
-             vector[min] = true;
+//             int min = menor(matriz,vector);
+//             vector[min] = true;
          }
      }
      
