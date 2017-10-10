@@ -5,7 +5,6 @@
  */
 package codigo.model;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -37,19 +36,6 @@ public class Mapa extends JPanel {
      */
     @Override
     public void paint(Graphics grafico) {
-//        Dimension height = getSize();
-//Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
-//        ImageIcon Img = new ImageIcon(getClass().getResource("/Imagenes/mapa.png"));
-
-//se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
-//        grafico.drawImage(Img.getImage(), 0, 0, null);
-
-//        Graphics2D pint = img.createGraphics();
-//        pint.setColor(Color.GREEN);
-//        pint.fillRect(200, 200, 100, 100);
-//        pint.dispose();
-        
-//        grafico.drawImage(imagen, 0, 0, height.width, height.height, null);
         grafico.drawImage(imagen, 0, 0, null);
 
         setOpaque(false);

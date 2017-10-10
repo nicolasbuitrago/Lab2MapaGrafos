@@ -7,19 +7,15 @@ package codigo.model;
 
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * Es la clase que se encaraga de encaragarse con todo auqello relacionado con el grafo
  * @author Estudiante
  */
 public class Grafo {
-    private ArrayList<Nodo> nodos;   //public Arco ai;      Nodo p;
+    private ArrayList<Nodo> nodos;
     private ArrayList<Arco> arcos;
-//  private int cantNodos = 0;
     public static final int TAM_NODOS = 20;
-    private int matriz[][];
     private int[][] adyacencia;
     private int minDistancia;
 
@@ -165,14 +161,8 @@ public class Grafo {
      * @return un ArrayList que almacena la ruta mas corta
      */
     public ArrayList<Arco> calcularRuta(Nodo ni, Nodo nf){
-//        if(buscarNodo(ni.getX(),ni.getY())!=null){
-//           ruta.add(buscarNodo(ni.getX(),ni.getY()));
-//        }
-//        Nodo nodoi = puntoP(ai,factorU(ni,ai)), nodof = puntoP(af,factorU(nf,af));
-//        ArrayList<Arco> ruta = new ArrayList();
-//        imprimirRuta(this.dijkstra(nodos.get(18), nodos.get((37))));
         this.minDistancia = 0;
-        Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);   System.out.println(printArco(ai)+" - "+printArco(af));
+        Arco ai = arcoMasCercano(ni), af = arcoMasCercano(nf);//   System.out.println(printArco(ai)+" - "+printArco(af));
         Ruta r = eleccion(ni,ai,nf,af);
         minDistancia += r.getDistancia();
         ArrayList<Arco> ruta = getArcosRuta(r);
@@ -183,9 +173,6 @@ public class Grafo {
         a = new Arco(nf,r.getLast());
         ruta.add(a);
         minDistancia += a.getDist();
-  
-//        ruta.add(af);
-//        ruta.add(nf);
         return ruta;
     }
     
@@ -239,8 +226,9 @@ public class Grafo {
         }
         nodoi = buscarNodo(ni);
         if(nodoi == null){System.out.println("\n");
-            Ruta r = dijkstra(ai.getNodoInicial(), nodof); imprimirRuta(r);
-            rutas.add(dijkstra(ai.getNodoInicial(), nodof)); r = dijkstra(ai.getNodoFinal(), nodof); imprimirRuta(r);System.out.println("\n");
+            //Ruta r = dijkstra(ai.getNodoInicial(), nodof); imprimirRuta(r);
+            rutas.add(dijkstra(ai.getNodoInicial(), nodof));
+            //r = dijkstra(ai.getNodoFinal(), nodof);// imprimirRuta(r);System.out.println("\n");
             rutas.add(dijkstra(ai.getNodoFinal(), nodof));
         }else{
             rutas.add(dijkstra(nodoi, nodof));
@@ -333,24 +321,6 @@ public class Grafo {
         return (int)Math.abs(d);
     }
     
-    /*
-     DIJKSTRA (Grafo G, nodo_fuente s)       
-       para u ∈ V[G] hacer
-           distancia[u] = INFINITO
-           padre[u] = NULL
-           visto[u] = false
-       distancia[s] = 0
-       adicionar (cola, (s, distancia[s]))
-       mientras que cola no es vacía hacer
-           u = extraer_mínimo(cola)
-           visto[u] = true
-           para todos v ∈ adyacencia[u] hacer
-               si no visto[v] y distancia[v] > distancia[u] + peso (u, v) hacer
-                   distancia[v] = distancia[u] + peso (u, v)
-                   padre[v] = u
-                   adicionar(cola,(v, distancia[v]))
-    
-    */
     
     /**
      * Meotod Dijkstra con pequeñas modificaciones usado para poder hallar el camino mas corto entre dos nodos de un grafo
@@ -360,11 +330,8 @@ public class Grafo {
      */
     private Ruta dijkstra(Nodo ni,Nodo nf){
         int[] distancia = new int[nodos.size()];
-//        Nodo[] padre = new Nodo[nodos.size()];
         boolean[] visto = new boolean[nodos.size()];
         ArrayList<Ruta> rutas = new ArrayList();
-//        adyacencia();//System.out.println("\n\n\n\n");
-//        int f = nodos.indexOf(nf);
         for (Nodo nodo : nodos) {
             int i = nodo.getName();
             distancia[i] = Integer.MAX_VALUE;
@@ -372,7 +339,7 @@ public class Grafo {
         }
         distancia[ni.getName()] = 0;
         ArrayList<Nodo> cola =  new ArrayList();  // cola de prioridad
-        Ruta ruta = new Ruta(); //Queue que = new LinkedList();
+        Ruta ruta = new Ruta();
         ruta.add(ni);
         cola.add(ni);  
         rutas.add(ruta);
@@ -384,7 +351,7 @@ public class Grafo {
                 if(adyacencia[u][j] == 1 && distancia[j]>distancia[u]+distancia(nod,nodos.get(j))){
                     distancia[j] = distancia[u]+distancia(nod,nodos.get(j));
                     add(rutas,nod,nodos.get(j));
-                    cola.add(nodos.get(j));   if(j==nf.getName()){ imprimirRuta(Ruta.rutaMasCorta(rutas,nf));System.out.println("+++++");}
+                    cola.add(nodos.get(j)); //  if(j==nf.getName()){ imprimirRuta(Ruta.rutaMasCorta(rutas,nf));System.out.println("+++++");}
                 }
             }
         }
@@ -465,12 +432,6 @@ public class Grafo {
                 }
             }
         } 
-//        for (int i = 0; i < nodos.size(); i++) {
-//            for (int j = 0; j < nodos.size(); j++) {
-//                System.out.print(adyacencia[i][j]+" ");
-//            }
-//            System.out.println("");
-//        }
     }
    
     /**
@@ -495,6 +456,11 @@ public class Grafo {
         return nod;
     }
     
+    /**
+     * Metodo que se encarga de la extracion de los elemntos de la cola
+     * @param n la cola de la que se va a extraer el elemento
+     * @return el elemento extraido de la cola
+     */
     private Nodo extraerPrimero(ArrayList<Nodo> n){
         Nodo nod = n.get(0);
         n.remove(nod);
@@ -510,229 +476,6 @@ public class Grafo {
             System.out.print(((Nodo)object).getName()+"   ");
         }
         System.out.println("\n");
-    }
-    
-    /*
-    private Nodo extraerMinimo(ArrayList<Nodo> n){
-        int min = Integer.MAX_VALUE, i=-1;
-        for (Nodo nodo : n) {
-            if (distancia[nodos.indexOf(nodo)]<min) {
-                min = distancia[nodos.indexOf(nodo)];
-                i = n.indexOf(nodo);
-            }
-        }
-        Nodo nodo = nodos.get(i);
-        n.remove(i);
-        return nodo;
-    }
-    
-    
-    
-    
-    function Dijkstra(Graph, source):
-2      dist[source] ← 0                                    // Initialization
-3
-4      create vertex set Q
-5
-6      for each vertex v in Graph:           
-7          if v ≠ source
-8              dist[v] ← INFINITY                          // Unknown distance from source to v
-9              prev[v] ← UNDEFINED                         // Predecessor of v
-10
-11         Q.add_with_priority(v, dist[v])
-12
-13
-14     while Q is not empty:                              // The main loop
-15         u ← Q.extract_min()                            // Remove and return best vertex
-16         for each neighbor v of u:                      // only v that is still in Q
-17             alt ← dist[u] + length(u, v) 
-18             if alt < dist[v]
-19                 dist[v] ← alt
-20                 prev[v] ← u
-21                 Q.decrease_priority(v, alt)
-22
-23     return dist[], prev[]
-    */
-    
-    
-//    ArrayList rutaMasCorta;
-//    int longitudMasCorta = Integer.MAX_VALUE;
-//    List<Nodo> listos=null;
-//    // encuentra la ruta más corta desde un nodo origen a un nodo destino
-//    public ArrayList encontrarRutaMinimaDijkstra(Nodo inicio,  Nodo fin) {
-//        // calcula la ruta más corta del inicio a los demás
-//        encontrarRutaMinimaDijkstra(inicio);
-//        // recupera el nodo final de la lista de terminados
-//        if (!listos.contains(fin)) {
-//            System.out.println("Error, nodo no alcanzable");
-//            return null;
-//        }
-//        fin = listos.get(listos.indexOf(fin));
-//        int distancia = fin; 
-//        // crea una pila para almacenar la ruta desde el nodo final al origen
-//        Stack<Nodo> pila =  new Stack();
-//        while (fin !=  null) {
-//            pila.add(fin);
-//            fin = fin.procedencia;
-//        }
-//        ArrayList ruta = new ArrayList();
-//        // recorre la pila para armar la ruta en el orden correcto
-//        while (!pila.isEmpty()) ruta.add(pila.pop());
-//        return ruta;
-//    }
-//    
-//    private ArrayList<Nodo> adyacentes(Nodo nodo){
-//        ArrayList<Nodo> adya = new ArrayList();
-//        for (Arco arco : arcos) {
-//            if(arco.getNodoInicial().equals(nodo)){
-//                adya.add(arco.getNodoFinal());
-//            }
-//            if(arco.getNodoFinal().equals(nodo)){
-//                adya.add(arco.getNodoInicial());
-//            }
-//        }
-//        return adya;
-//    }
-// 
-//    // encuentra la ruta más corta desde el nodo inicial a todos los demás
-//    public void encontrarRutaMinimaDijkstra(Nodo inicio) {
-//        Queue<Nodo> cola =  new PriorityQueue();  // cola de prioridad
-//         
-//        listos =  new LinkedList(); // lista de nodos ya revisados
-//        cola.add(inicio);  // Agregar nodo inicial a la cola de prioridad
-//        while (!cola.isEmpty()) {  // mientras que la cola no esta vacia }
-//            Nodo tmp = cola.poll();  // saca el primer elemento
-//            listos.add(tmp);  // lo manda a la lista de terminados
-////            int p = posicionNodo(tmp.id); 
-//            ArrayList<Nodo> adyacentes = adyacentes(tmp);
-//            for (Nodo nodo : adyacentes) {
-//                if (estaTerminado(nodo)) continue;
-//                if (!cola.contains(nodo)) {
-//                    cola.add(nodo);
-//                    continue;
-//                }
-//                // si ya está en la cola de prioridad actualiza la distancia menor
-//                for (Nodo x : cola) {
-//                    // si la distancia en la cola es mayor que la distancia calculada
-//                    if (x.equals(nodo) && x.distancia> nodo.distancia) {
-//                        cola.remove(x);  // remueve el nodo de la cola
-//                        cola.add(nodo);  // agrega el nodo con la nueva distancia
-//                        break ;  // no sigue revisando
-//                    }
-//                }
-//            }
-//        }
-//    }
-// 
-//    // verifica si un nodo ya está en lista de terminados
-//    public boolean estaTerminado(Nodo nodo) {
-//        return listos.contains(nodo);
-//    }
-// 
-//    // encontrar la ruta mínima por fuerza bruta
-//    public void encontrarRutaMinimaFuerzaBruta(Nodo inicio,  Nodo fin) {
-//        int p1 = nodos.indexOf(inicio);
-//        int p2 = nodos.indexOf(fin);
-//        // cola para almacenar cada ruta que está siendo evaluada
-//        Stack<Integer> resultado =  new Stack();
-//        resultado.push(p1);
-//        recorrerRutas(p1, p2, resultado);
-//    }
-// 
-//    // recorre recursivamente las rutas entre un nodo inicial y un nodo final
-//    // almacenando en una cola cada nodo visitado
-//    private void recorrerRutas(int nodoI, int nodoF, Stack<Integer> resultado) {
-//        // si el nodo inicial es igual al final se evalúa la ruta en revisión
-//        if(nodoI==nodoF) {
-//            int respuesta = evaluar(resultado);
-//            if(respuesta < longitudMasCorta) {
-//                longitudMasCorta = respuesta;
-//                rutaMasCorta = new ArrayList();
-//                for(int x: resultado) rutaMasCorta.add(nodos.get(x));
-//            }
-//            return;
-//        }
-//        // Si el nodoInicial no es igual al final se crea una lista con todos los nodos
-//        // adyacentes al nodo inicial que no estén en la ruta en evaluación
-//        List<Integer> lista = new Vector();
-//        for(int i=0; i<grafo.length;i++) {
-//            if(grafo[nodoI][i]!=0 && !resultado.contains(i))lista.add(i);
-//        }
-//        // se recorren todas las rutas formadas con los nodos adyacentes al inicial
-//        for(int nodo: lista) {
-//            resultado.push(nodo);
-//            recorrerRutas(nodo, nodoF, resultado);
-//            resultado.pop();
-//        }
-//        Nodo nodo = nodos.get(nodoI);
-//        ArrayList<Integer> adya = new ArrayList();
-//        for (int i = 0; i < arcos.size(); i++) {
-//            Arco arco = arcos.get(i);
-//            if (!resultado.contains(i)) {
-//                if (arco.getNodoInicial().equals(nodo)) {
-//                    adya.add(arco.getNodoFinal());
-//                }
-//                if (arco.getNodoFinal().equals(nodo)) {
-//                    adya.add(arco.getNodoInicial());
-//                }
-//            }
-//        }
-//    }
-// 
-//    // evaluar la longitud de una ruta
-//    public int evaluar(Stack<Integer> resultado) {
-//        int resp =  0;
-//        int [] r =  new int [resultado.size()];
-//        int i =  0;
-//        for (int x: resultado) r[i++]=x;
-//        for (i=1; i<r.length; i++) resp+=grafo[r[i]][r[i-1 ]]]];
-//        return resp;
-//    }
-    
-    
-     private void calcularMatriz(){
-        matriz = new int [nodos.size()][nodos.size()];
-        for (Arco arco : arcos) {
-//            matriz[arco.getNodoInicial()][arco.getNodoFinal()] = arco.dist;
-//            matriz[arco.getNodoFinal()][arco.getNodoInicial()] = arco.dist;
-        }
-        prim();
-    }
-     
-     private void prim(){
-         boolean vector[] = new boolean[nodos.size()];
-         vector[0]=true;
-         while (todosSeleccionados(vector)) {             
-             int min = menor(matriz,vector);
-             vector[min] = true;
-         }
-     }
-     
-     private int menor(int[][] matriz, boolean[] vector){
-         int menor = Integer.MAX_VALUE;
-         int fila = -1, col = -1;
-         for (int i = 0; i < matriz.length; i++) {
-             if (vector[i]) {
-                 for (int j = 0; j < matriz.length; j++) {
-                     if (matriz[j][i]!=0 && vector[j]==false && matriz[j][i]<=menor) {
-                         menor = matriz[j][i];
-                         fila = j;
-                         col = i;
-                     }
-                 }
-             }
-         }
-         System.out.println(""+fila+" - "+col);
-         return fila;
-     }
-     
-     private boolean todosSeleccionados(boolean[] vector) {
-         for (int i = 0; i < vector.length; i++) {
-             if(!vector[i]){
-                 return true;
-             }
-         }
-         return false;
     }
      
      public String printArco(Arco arco){
